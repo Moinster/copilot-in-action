@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot in Action &middot; PowerPoint &amp; Outlook</title>
+  <meta name="description" content="A hands-on Microsoft 365 Copilot lab: eight scenarios across PowerPoint and Outlook, with every prompt copy-ready and every lab file downloadable.">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23e4002b'/><path d='M16 6l10 10-10 10L6 16z' fill='%23ffb81c'/></svg>">
+  <style>
+    :root {
+      --red: #e4002b;
+      --red-deep: #a6001f;
+      --gold: #ffb81c;
+      --ink: #1a1110;
+      --cream: #faf3ea;
+      --paper: #fffdfa;
+      --sage: #e3e7dc;
+      --navy: #17394f;
+      --muted: #6e5f58;
+      --line: rgba(26, 17, 16, 0.15);
+      --shadow: 0 24px 70px rgba(45, 20, 20, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background:
+        linear-gradient(115deg, transparent 0 72%, rgba(228, 0, 43, 0.06) 72% 100%),
+        repeating-linear-gradient(0deg, transparent 0 31px, rgba(26, 17, 16, 0.035) 31px 32px),
+        var(--cream);
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    button, a { font: inherit; }
+    a { color: inherit; }
+    button { color: inherit; }
+
+    .skip-link {
+      position: fixed;
+      top: 0.75rem;
+      left: -999px;
+      z-index: 200;
+      padding: 0.7rem 1rem;
+      color: white;
+      background: var(--ink);
+    }
+
+    .skip-link:focus { left: 0.75rem; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: minmax(230px, 1fr) minmax(250px, 640px);
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      min-height: 76px;
+      padding: 0.85rem clamp(1rem, 3vw, 2.25rem);
+      color: white;
+      background: rgba(26, 17, 16, 0.96);
+      border-bottom: 4px solid var(--red);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex: 0 0 auto;
+      background: var(--red);
+      transform: rotate(45deg);
+      box-shadow: 0 0 0 5px rgba(228, 0, 43, 0.22);
+    }
+
+    .brand strong,
+    .brand small { display: block; }
+    .brand strong { letter-spacing: 0.02em; }
+    .brand small { color: rgba(255,255,255,0.66); }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .progress-track {
+      height: 0.45rem;
+      background: rgba(255,255,255,0.16);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      display: block;
+      width: 12.5%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transition: width 240ms ease;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr) 310px;
+      gap: 1.25rem;
+      width: min(1680px, 100%);
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .rail,
+    .resources {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      max-height: calc(100vh - 118px);
+      overflow: auto;
+    }
+
+    .rail {
+      padding: 1rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .rail-header {
+      padding: 0.5rem 0.45rem 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.6rem;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+
+    h1 { font-size: 1.8rem; }
+    h2 { max-width: 970px; font-size: clamp(2.5rem, 5vw, 5.4rem); }
+    h3 { font-size: 1.45rem; }
+    h4 { font-size: 1.1rem; }
+
+    .legacy-panel h2 {
+      font-family: "Aptos Display", "Segoe UI", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+    }
+
+    .legacy-kicker {
+      width: fit-content;
+      margin-bottom: 1.1rem;
+      padding: 0.38rem 0.65rem;
+      color: white;
+      background: var(--red);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .legacy-lede {
+      max-width: 850px;
+      margin: 1.25rem 0 2rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+    }
+
+    .objective-list,
+    .formula-card {
+      display: grid;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .objective-list { grid-template-columns: repeat(2, 1fr); }
+    .formula-card { grid-template-columns: repeat(4, 1fr); margin: 1.5rem 0; }
+
+    .phase-card {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      margin: 1.5rem 0;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .phase-card article {
+      padding: 1rem 1.1rem;
+      background: var(--paper);
+    }
+
+    .phase-card b {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .phase-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin: 1.5rem 0 0.75rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .stat-grid article {
+      padding: 1.25rem;
+      background: var(--paper);
+    }
+
+    .stat-grid strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: var(--red);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.15rem;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .stat-grid span { color: var(--muted); font-size: 0.9rem; }
+
+    .source-note {
+      margin: 0.5rem 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .source-note a { text-decoration: underline; }
+
+    .objective-list article,
+    .formula-card span {
+      padding: 1.2rem;
+      background: var(--paper);
+    }
+
+    .objective-list span {
+      color: var(--red);
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .objective-list p { margin: 0.4rem 0 0; color: var(--muted); }
+
+    .formula-card span {
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .formula-card .ingredient-goal { color: white; background: #17394f; }
+    .formula-card .ingredient-context { color: white; background: #2f6f44; }
+    .formula-card .ingredient-source { color: white; background: #7a2140; }
+    .formula-card .ingredient-expectations { color: white; background: #c8102e; }
+
+    .prompt-ingredient { font-weight: 900; }
+    .prompt-ingredient.ingredient-goal { color: #17394f; }
+    .prompt-ingredient.ingredient-context { color: #2f6f44; }
+    .prompt-ingredient.ingredient-source { color: #7a2140; }
+    .prompt-ingredient.ingredient-expectations { color: #c8102e; }
+
+    .check-list {
+      display: grid;
+      gap: 0.7rem;
+      margin: 1.5rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 1.8rem;
+    }
+
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.42rem;
+      left: 0;
+      width: 0.8rem;
+      height: 0.8rem;
+      background: var(--red);
+      transform: rotate(45deg);
+    }
+
+    .activity-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.15rem;
+      background: rgba(228, 0, 43, 0.07);
+      border-left: 6px solid var(--red);
+    }
+
+    .nav {
+      display: grid;
+      gap: 0.35rem;
+      padding-top: 0.85rem;
+    }
+
+    .nav-button {
+      display: grid;
+      grid-template-columns: 2.1rem minmax(0, 1fr);
+      gap: 0.7rem;
+      align-items: center;
+      width: 100%;
+      padding: 0.7rem;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .nav-button:hover,
+    .nav-button:focus-visible { background: rgba(228, 0, 43, 0.09); }
+
+    .nav-button.is-active {
+      color: white;
+      background: var(--ink);
+    }
+
+    .nav-number {
+      display: grid;
+      place-items: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      color: white;
+      background: var(--red);
+      font-size: 0.75rem;
+      font-weight: 950;
+    }
+
+    .nav-button small {
+      display: block;
+      margin-top: 0.12rem;
+      color: var(--muted);
+    }
+
+    .nav-button.is-active small { color: rgba(255,255,255,0.68); }
+
+    .stage {
+      min-width: 0;
+      background: rgba(255,253,250,0.9);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      display: none;
+      min-height: calc(100vh - 170px);
+      padding: clamp(1.6rem, 4vw, 4.25rem);
+      overflow: hidden;
+    }
+
+    .panel.is-active {
+      display: block;
+      animation: reveal 280ms ease-out both;
+    }
+
+    @keyframes reveal {
+      from { transform: translateY(12px); }
+      to { transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .panel.is-active { animation: none; }
+      .progress-fill { transition: none; }
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      width: fit-content;
+      margin-bottom: 1.15rem;
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 950;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 2.5rem;
+      height: 4px;
+      background: var(--red);
+    }
+
+    .lede {
+      max-width: 880px;
+      margin: 1.35rem 0 2rem;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.4rem);
+    }
+
+    .hero-grid,
+    .capability-grid,
+    .choice-grid,
+    .output-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .hero-grid { grid-template-columns: repeat(3, 1fr); margin-top: 2rem; }
+    .capability-grid { grid-template-columns: repeat(3, 1fr); }
+    .choice-grid { grid-template-columns: repeat(2, 1fr); }
+    .output-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .hero-grid article,
+    .capability-grid article,
+    .choice-card,
+    .output-grid article {
+      padding: 1.25rem;
+      background: var(--paper);
+    }
+
+    .hero-grid strong,
+    .capability-grid strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--red);
+      font-size: 1.55rem;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .scenario-banner {
+      position: relative;
+      margin: 2rem 0;
+      padding: 1.5rem 1.6rem 1.5rem 2rem;
+      color: white;
+      background: var(--navy);
+      overflow: hidden;
+    }
+
+    .scenario-banner::after {
+      content: "DECIDE";
+      position: absolute;
+      right: -0.5rem;
+      bottom: -1.3rem;
+      color: rgba(255,255,255,0.08);
+      font: 900 5.5rem/1 Georgia, serif;
+      letter-spacing: -0.06em;
+    }
+
+    .scenario-banner p { max-width: 760px; margin: 0.5rem 0 0; }
+
+    .scenario-banner.plain::after { content: none; }
+
+    .prompt-card {
+      margin: 1.25rem 0;
+      background: white;
+      border: 1px solid var(--line);
+      box-shadow: 9px 9px 0 rgba(228, 0, 43, 0.12);
+    }
+
+    .prompt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .prompt-header h3,
+    .prompt-header h4 { font-family: "Aptos", "Segoe UI", sans-serif; letter-spacing: 0; }
+
+    pre {
+      margin: 0;
+      padding: 1.2rem;
+      white-space: pre-wrap;
+      color: #2d221f;
+      font: 600 0.98rem/1.65 "Aptos", "Segoe UI", sans-serif;
+    }
+
+    .copy-button,
+    .guide-button {
+      border: 0;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .copy-button {
+      padding: 0.45rem 0.7rem;
+      color: white;
+      background: var(--ink);
+    }
+
+    .copy-button:hover,
+    .copy-button:focus-visible { background: var(--red); }
+
+    .steps {
+      display: grid;
+      gap: 0.7rem;
+      margin: 1.4rem 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 2.35rem minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: start;
+    }
+
+    .steps li::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: grid;
+      place-items: center;
+      width: 2.35rem;
+      height: 2.35rem;
+      color: white;
+      background: var(--red);
+      font-weight: 950;
+    }
+
+    .steps strong { display: block; }
+
+    .reflection,
+    .ga-note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.15rem;
+      border-left: 6px solid var(--red);
+      background: rgba(228, 0, 43, 0.07);
+    }
+
+    .ga-note {
+      border-color: var(--navy);
+      background: rgba(23, 57, 79, 0.08);
+    }
+
+    .route-intro {
+      margin: 1.5rem 0 0.65rem;
+      padding-top: 1.25rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .route-intro strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--ink);
+      font-size: 1.12rem;
+    }
+
+    .new-chat-note {
+      margin: 1rem 0;
+      padding: 0.75rem 0.9rem;
+      color: var(--navy);
+      background: rgba(23, 57, 79, 0.07);
+      border: 1px solid rgba(23, 57, 79, 0.2);
+      font-size: 0.9rem;
+    }
+
+    .access-steps {
+      display: grid;
+      gap: 0.35rem;
+      margin: 0.65rem 0 1rem;
+      padding-left: 1.25rem;
+      color: var(--muted);
+    }
+
+    .access-steps strong { color: var(--ink); }
+
+    .resources {
+      padding: 1rem;
+      color: white;
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+
+    .resources h2 {
+      margin-bottom: 1rem;
+      font-size: 1.7rem;
+    }
+
+    .resource-block {
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .resource-block h3 {
+      margin-bottom: 0.65rem;
+      color: var(--gold);
+      font: 850 0.78rem/1.2 "Aptos", "Segoe UI", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .resource-block a {
+      display: block;
+      margin: 0.45rem 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.88rem;
+    }
+
+    .resource-block a:hover { color: white; }
+    .resource-block p { color: rgba(255,255,255,0.72); font-size: 0.88rem; }
+
+    .guide {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .guide-button {
+      padding: 0.75rem 1rem;
+      color: white;
+      background: var(--red);
+    }
+
+    .guide-button.secondary { color: var(--ink); background: var(--sage); }
+    .guide-button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .status { color: var(--muted); font-weight: 850; }
+
+    .fineprint {
+      width: min(1680px, 100%);
+      margin: 0 auto;
+      padding: 0 1.25rem 2.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    @media (max-width: 1180px) {
+      .layout { grid-template-columns: 260px minmax(0, 1fr); }
+      .phase-card { grid-template-columns: repeat(2, 1fr); }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .resources { position: static; grid-column: 1 / -1; max-height: none; }
+      .resource-block { display: inline-block; width: 32%; vertical-align: top; padding-right: 1rem; }
+    }
+
+    @media (max-width: 780px) {
+      .topbar {
+        width: 100%;
+        min-width: 0;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+        padding-inline: 0.85rem;
+      }
+      .brand strong { font-size: 0.92rem; }
+      .brand small { font-size: 0.75rem; }
+      .topbar-progress { grid-column: 1 / -1; grid-row: 2; }
+      .layout,
+      .rail,
+      .stage,
+      .resources {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+      }
+      .layout { display: block; padding: 0.75rem; }
+      .rail { position: static; max-height: none; margin-bottom: 0.75rem; overflow: hidden; }
+      .nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .nav-button { display: block; width: auto; min-width: 0; padding: 0.45rem; text-align: center; }
+      .nav-button div:last-child { display: none; }
+      .nav-number { margin: auto; }
+      .panel { min-height: auto; padding: 1.35rem; }
+      pre, h1, h2, h3, p, a { overflow-wrap: anywhere; }
+      .hero-grid,
+      .capability-grid,
+      .choice-grid,
+      .output-grid,
+      .objective-list,
+      .formula-card,
+      .phase-card,
+      .stat-grid { grid-template-columns: 1fr; }
+      .resource-block { display: block; width: auto; }
+      .guide { flex-wrap: wrap; }
+      h2 { font-size: clamp(2.3rem, 10vw, 3.1rem); }
+    }
+
+    /* ---- Lab companion additions ---- */
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin: 1.9rem 0 2.5rem;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .file-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.4rem;
+      background: var(--paper);
+    }
+
+    .file-kind {
+      color: var(--red);
+      font-size: 0.7rem;
+      font-weight: 950;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .file-card h3 {
+      margin: 0.6rem 0 0.7rem;
+      font-size: 1.22rem;
+      line-height: 1.1;
+    }
+
+    .file-card p {
+      margin: 0 0 1.3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .file-meta { margin-top: auto; }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag {
+      padding: 0.22rem 0.5rem;
+      font-size: 0.68rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tag.ppt { color: white; background: #c8102e; }
+    .tag.otl { color: white; background: var(--navy); }
+    .tag.all { color: var(--ink); background: var(--gold); }
+
+    .download-link {
+      display: inline-block;
+      padding: 0.62rem 0.9rem;
+      color: white;
+      background: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .download-link:hover,
+    .download-link:focus-visible { background: var(--red); }
+
+    .map-heading {
+      margin: 2rem 0 0.9rem;
+      padding-top: 1.4rem;
+      font-family: "Aptos", "Segoe UI", sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      border-top: 1px solid var(--line);
+    }
+
+    .map-wrap { overflow-x: auto; }
+
+    .map-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+
+    .map-table th {
+      padding: 0.75rem 0.9rem;
+      color: white;
+      background: var(--ink);
+      text-align: left;
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .map-table td {
+      padding: 0.75rem 0.9rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .map-table tbody tr td:first-child { color: var(--ink); font-weight: 700; }
+    .map-table tbody tr td:nth-child(2) { color: var(--ink); }
+    .map-table td.none { color: var(--muted); font-weight: 400; font-style: italic; }
+    .map-table .tag { margin-right: 0.45rem; }
+
+    .needs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 1.4rem 0;
+      padding: 0.85rem 1rem;
+      background: rgba(23, 57, 79, 0.07);
+      border: 1px solid rgba(23, 57, 79, 0.2);
+      font-size: 0.9rem;
+    }
+
+    .needs > strong {
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .needs a { color: var(--navy); font-weight: 850; text-decoration: underline; }
+    .needs .none { color: var(--muted); }
+
+    .capability-grid.four { grid-template-columns: repeat(4, 1fr); }
+    .capability-grid { margin: 1.75rem 0; }
+    .capability-grid p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    .capability-grid strong { font-size: 1.35rem; }
+    /* Inline emphasis inside card body text must not inherit the card-title style. */
+    .capability-grid p strong,
+    .hero-grid p strong {
+      display: inline;
+      margin: 0;
+      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 900;
+    }
+
+    .phase-card.three-up { grid-template-columns: repeat(3, 1fr); }
+
+    .check-list li strong { color: var(--ink); }
+
+    .guide { padding: 1.3rem clamp(1.6rem, 4vw, 4.25rem) 1.6rem; margin-top: 0; }
+
+    /* Original rule makes every <strong> in a step block-level; only the lead-in should be. */
+    .steps strong { display: inline; }
+    .steps li > div > strong:first-child { display: block; }
+
+    /* 11 rail items need to fit a laptop viewport without scrolling. */
+    .rail-header { padding-bottom: 0.75rem; }
+    .rail-header h1 { font-size: 1.55rem; }
+    .nav { gap: 0.25rem; padding-top: 0.6rem; }
+    .nav-button { padding: 0.5rem 0.6rem; }
+    .nav-number { width: 1.85rem; height: 1.85rem; }
+    .nav-button { grid-template-columns: 1.85rem minmax(0, 1fr); }
+    .nav-button small { font-size: 0.8rem; }
+
+    @media (max-width: 1180px) {
+      .file-grid { grid-template-columns: repeat(2, 1fr); }
+      .capability-grid.four { grid-template-columns: repeat(2, 1fr); }
+      .phase-card.three-up { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 780px) {
+      .file-grid,
+      .capability-grid.four,
+      .phase-card.three-up { grid-template-columns: 1fr; }
+      .map-table { font-size: 0.82rem; }
+      .needs { align-items: flex-start; flex-direction: column; gap: 0.45rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#scenario-title">Skip to scenario</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div><strong>Copilot in Action</strong><small>PowerPoint &middot; Outlook</small></div>
+    </div>
+    <div class="topbar-progress">
+      <div class="progress-label"><span id="progress-label">Section 1 of 11</span><span>8 scenarios &middot; 2 apps</span></div>
+      <div class="progress-track" aria-hidden="true"><span class="progress-fill" id="progress-fill"></span></div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="rail" aria-label="Lab scenarios">
+      <div class="rail-header">
+        <p class="eyebrow">Microsoft 365 Copilot</p>
+        <h1>Copilot across PowerPoint &amp; Outlook</h1>
+      </div>
+      <nav class="nav">
+        <button class="nav-button is-active" type="button" data-nav="0"><span class="nav-number">01</span>        <div><strong>Welcome</strong><small>What this lab covers</small></div></button>
+                <button class="nav-button" type="button" data-nav="1"><span class="nav-number">02</span><div><strong>Lab files</strong><small>What to download</small></div></button>
+        <button class="nav-button" type="button" data-nav="2"><span class="nav-number">03</span><div><strong>PPT &middot; Grounded content</strong><small>Blank slate to draft</small></div></button>
+        <button class="nav-button" type="button" data-nav="3"><span class="nav-number">04</span><div><strong>PPT &middot; Template-based</strong><small>Generic to on-brand</small></div></button>
+        <button class="nav-button" type="button" data-nav="4"><span class="nav-number">05</span><div><strong>PPT &middot; Brand Kits</strong><small>What, why, how, who</small></div></button>
+        <button class="nav-button" type="button" data-nav="5"><span class="nav-number">06</span><div><strong>PPT &middot; Skills</strong><small>Standards, encoded once</small></div></button>
+        <button class="nav-button" type="button" data-nav="6"><span class="nav-number">07</span><div><strong>Outlook &middot; Prioritize</strong><small>You define what matters</small></div></button>
+        <button class="nav-button" type="button" data-nav="7"><span class="nav-number">08</span><div><strong>Outlook &middot; Calendar</strong><small>Rules, then ask for time</small></div></button>
+        <button class="nav-button" type="button" data-nav="8"><span class="nav-number">09</span><div><strong>Outlook &middot; De-clutter</strong><small>Steer the goals</small></div></button>
+        <button class="nav-button" type="button" data-nav="9"><span class="nav-number">10</span><div><strong>Outlook &middot; Triage assistant</strong><small>A brief, every morning</small></div></button>
+        <button class="nav-button" type="button" data-nav="10"><span class="nav-number">11</span><div><strong>Q&amp;A</strong><small>And what to do next</small></div></button>
+      </nav>
+    </aside>
+
+    <main class="stage" aria-live="polite">
+
+      <!-- ============ 1 · WELCOME ============ -->
+      <section class="panel legacy-panel is-active" data-panel="0">
+        <div class="legacy-kicker">Microsoft 365 Copilot &middot; PowerPoint &amp; Outlook</div>
+        <h2 id="scenario-title">Copilot in Action</h2>
+        <p class="legacy-lede">Making Copilot real across PowerPoint and Outlook. Eight scenarios across two applications &mdash; and every file you need to run them yourself, during the lab or long after it.</p>
+
+        <div class="objective-list">
+          <article><span>Ground it</span><p>Turn a research document into a working draft deck with referenced content, instead of starting from a blank slate.</p></article>
+          <article><span>Brand it</span><p>Move from generic output to a polished, on-brand asset using a template, a Brand Kit, and Skills.</p></article>
+          <article><span>Prioritize it</span><p>Tell Copilot what matters in your inbox, and have it flag and explain as mail arrives.</p></article>
+          <article><span>Automate it</span><p>Set standing rules for your calendar and inbox, then build an assistant that briefs you each morning.</p></article>
+        </div>
+
+        <div class="hero-grid">
+          <article><strong>PowerPoint</strong><p>Four scenarios: grounded generation, template-based creation, Brand Kits, and Skills. Each one builds on the artifact from the last.</p></article>
+          <article><strong>Outlook</strong><p>Four scenarios: inbox prioritization, calendar governance, inbox clean-up, and a scheduled executive triage assistant.</p></article>
+          <article><strong>Q&amp;A</strong><p>Open floor. Bring the workflow you could not make work &mdash; that is usually where the useful conversation is.</p></article>
+        </div>
+
+        <div class="ga-note"><strong>Before you start:</strong> Sign in to Microsoft 365 Copilot with your work account. For the PowerPoint scenarios, save the lab files to <strong>OneDrive or SharePoint</strong> &mdash; Copilot in PowerPoint references cloud-stored files, not files sitting on your desktop. Close anything you would not want visible during a shared exercise.</div>
+
+        <div class="activity-note"><strong>Practice data note:</strong> The lab files use <strong>Zava</strong>, a fictional materials brand, and <strong>Project Northstar</strong>, a fictional consumer research programme. Every company, person, figure, and research finding in them is invented for Microsoft 365 Copilot demonstration purposes and does not represent real data.</div>
+      </section>
+
+      <!-- ============ 2 · LAB FILES ============ -->
+      <section class="panel legacy-panel" data-panel="1">
+        <div class="legacy-kicker">Section 2</div>
+        <h2>The lab files</h2>
+        <p class="legacy-lede">Three files support the eight scenarios. Two are inputs you hand to Copilot. The third is the prompt guide &mdash; every prompt on this site, in one document you can take back to your desk.</p>
+
+        <div class="file-grid">
+          <article class="file-card">
+            <span class="file-kind">Word document &middot; 39 KB</span>
+            <h3>Project Northstar &mdash; Consumer Research Summary</h3>
+            <p>A fictional research summary from Insights &amp; Analytics covering four headline findings: a 25&ndash;34 segment that behaves differently than assumed, product-finder friction, a channel mix that has fallen behind consumer behaviour, and a conditional willingness to trade data for relevance. It closes with three <strong>Open Questions</strong> &mdash; which both PowerPoint prompts deliberately fence the final slide to.</p>
+            <div class="file-meta">
+              <div class="tag-row"><span class="tag ppt">PowerPoint 1</span><span class="tag ppt">PowerPoint 2</span></div>
+              <a class="download-link" href="assets/Northstar_Consumer_Research_Summary.docx" download>Download the summary</a>
+            </div>
+          </article>
+
+          <article class="file-card">
+            <span class="file-kind">PowerPoint template &middot; 24.4 MB</span>
+            <h3>Zava Corporate Template</h3>
+            <p>A 33-slide, 36-layout corporate template for the fictional Zava brand, in 16:9. It carries title, section header, agenda, content, photo, comparison, conclusion, large-number, statement, and quote layouts, plus the brand's typography, palette, and imagery treatment. This is the style guide Copilot reads in scenario 2.</p>
+            <div class="file-meta">
+              <div class="tag-row"><span class="tag ppt">PowerPoint 2</span><span class="tag ppt">PowerPoint 3</span></div>
+              <a class="download-link" href="assets/Zava_Corporate_Template.pptx" download>Download the template</a>
+            </div>
+          </article>
+
+          <article class="file-card">
+            <span class="file-kind">Word document &middot; 18 KB</span>
+            <h3>Copilot Prompt Guide</h3>
+            <p>Every prompt used in this lab in a single document: the three PowerPoint prompts, the Outlook prioritization and calendar instructions, the inbox clean-up pair, and the full executive triage brief. The prompts on this site match it exactly &mdash; the guide is the take-home copy.</p>
+            <div class="file-meta">
+              <div class="tag-row"><span class="tag all">All 8 scenarios</span></div>
+              <a class="download-link" href="assets/Copilot_Prompt_Guide.docx" download>Download the prompt guide</a>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="map-heading">Which file goes with which scenario</h3>
+        <div class="map-wrap">
+          <table class="map-table">
+            <thead><tr><th>Scenario</th><th>What you need</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><span class="tag ppt">PPT 1</span> Grounded content generation</td><td>Northstar summary</td><td>The document is the sole source for the deck's content.</td></tr>
+              <tr><td><span class="tag ppt">PPT 2</span> Template-based creation</td><td>Northstar summary <em>and</em> Zava template</td><td>Same content, but the template supplies layout, colour, type, and graphics.</td></tr>
+              <tr><td><span class="tag ppt">PPT 3</span> Brand Kits</td><td>An unpolished deck &mdash; use your scenario 1 output</td><td>The point is watching a generic deck get restyled to brand in place.</td></tr>
+              <tr><td><span class="tag ppt">PPT 4</span> PowerPoint Skills</td><td>Your deck from scenario 2</td><td>Skills run against a finished artifact, so scenario 2's output is the test subject.</td></tr>
+              <tr><td><span class="tag otl">OTL 1</span> Inbox prioritization</td><td class="none">No file &mdash; your own mailbox</td><td>Prioritization is only meaningful against mail you actually receive.</td></tr>
+              <tr><td><span class="tag otl">OTL 2</span> Govern your calendar</td><td class="none">No file &mdash; your own calendar</td><td>The rules govern your real meeting load.</td></tr>
+              <tr><td><span class="tag otl">OTL 3</span> De-clutter the inbox</td><td class="none">No file &mdash; your own mailbox</td><td>Copilot proposes a structure based on what is actually in your inbox.</td></tr>
+              <tr><td><span class="tag otl">OTL 4</span> Executive triage assistant</td><td class="none">No file &mdash; your own work context</td><td>The brief reads across your mail, chats, invitations, and tasks.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="activity-note"><strong>The PowerPoint scenarios are a chain, not four independent exercises.</strong> Scenario 1 produces the unpolished deck that scenario 3 restyles. Scenario 2 produces the on-brand deck that scenario 4 runs Skills against. Keep both outputs open as you go.</div>
+      </section>
+
+      <!-- ============ 3 · PPT 1 ============ -->
+      <section class="panel" data-panel="2">
+        <div class="kicker">PowerPoint &middot; Scenario 1</div>
+        <h2>Grounded content generation.</h2>
+        <p class="lede">Turn a blank slate into a working draft with referenced content &mdash; sourced from a document you supply, not from the model's general knowledge.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> Artifact creation based on input file(s) &mdash; turn a blank slate into a working draft with referenced content.</div>
+
+        <div class="needs"><strong>Files</strong><a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar Consumer Research Summary</a></div>
+
+        <ol class="steps">
+          <li><div><strong>Put the summary in OneDrive or SharePoint.</strong> Copilot in PowerPoint references cloud-stored files. A copy on your desktop will not be found.</div></li>
+          <li><div><strong>Open a new, blank presentation.</strong> Then open the Copilot pane.</div></li>
+          <li><div><strong>Paste the prompt and reference the file.</strong> Type <strong>/</strong> to attach it by name, or name it in the prompt exactly as it is saved.</div></li>
+          <li><div><strong>Check the references, not just the slides.</strong> Open the summary alongside the deck and confirm the four findings and the open questions came from the document &mdash; and that nothing was added.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Grounded generation</h3><button class="copy-button" type="button" data-copy="ppt-grounded">Copy</button></div>
+          <pre id="ppt-grounded">Create a presentation from the Project Northstar Consumer Research Summary. Use the four headline findings as the slide outline, and format the messaging &amp; the language at a Marketing Director audience. Add a slide at the end covering only the open questions listed in the document. Do not add questions that are not in it.</pre>
+        </div>
+
+        <div class="activity-note"><strong>Notice what the prompt is doing.</strong> It sets the outline (the four headline findings), the audience (Marketing Director), and a hard boundary on the final slide (<em>only</em> the open questions in the document, and no others). That last clause is the interesting one &mdash; it is a constraint, not a request.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> The document lists exactly three open questions. Did your final slide contain three &mdash; or did a plausible fourth appear? Grounding is a claim you should verify, not assume.</p>
+      </section>
+
+      <!-- ============ 4 · PPT 2 ============ -->
+      <section class="panel" data-panel="3">
+        <div class="kicker">PowerPoint &middot; Scenario 2</div>
+        <h2>Template-based creation.</h2>
+        <p class="lede">Same source, same audience, same outline &mdash; but now Copilot has a template to work from. Move from generic output to a polished, on-brand asset.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> Move from generic outputs to polished, on-brand assets.</div>
+
+        <div class="needs"><strong>Files</strong><a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar Consumer Research Summary</a><a href="assets/Zava_Corporate_Template.pptx" download>Zava Corporate Template</a></div>
+
+        <ol class="steps">
+          <li><div><strong>Save both files to OneDrive or SharePoint.</strong> Copilot needs to reach the template as well as the source document.</div></li>
+          <li><div><strong>Start a new presentation and open Copilot.</strong> Start a fresh conversation so scenario 1 does not colour the result.</div></li>
+          <li><div><strong>Paste the prompt, referencing both files.</strong> The summary is the content; the template is the style guide.</div></li>
+          <li><div><strong>Put the two decks side by side.</strong> Identical content brief, materially different artifact. That gap is the point of the scenario.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Template-based creation</h3><button class="copy-button" type="button" data-copy="ppt-template">Copy</button></div>
+          <pre id="ppt-template">Create a presentation from the Project Northstar Consumer Research Summary while also using the attached template as a style guide for layouts, style, graphics, color scheme, themes and other relevant design components. Use the four headline findings as the slide outline, and format the messaging &amp; language at a Marketing Director audience. Add a slide at the end covering only the open questions listed in the document. Do not add questions that are not in it.</pre>
+        </div>
+
+        <div class="activity-note"><strong>Keep this deck.</strong> Scenario 4 runs Skills against the artifact you create here, and it is the natural comparison point when scenario 3 restyles your scenario 1 output.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> The Zava template carries 36 layouts. Did Copilot reach for the right ones &mdash; section headers, large-number, quote &mdash; or default to title-and-bullets in brand colours? On-brand and well-designed are not the same achievement.</p>
+      </section>
+
+      <!-- ============ 5 · PPT 3 ============ -->
+      <section class="panel" data-panel="4">
+        <div class="kicker">PowerPoint &middot; Scenario 3</div>
+        <h2>Brand Kits &mdash; what, why, how, who.</h2>
+        <p class="lede">A Brand Kit holds your organization's design system so Copilot can restyle an existing deck to brand, rather than you rebuilding it slide by slide.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> What it holds, why they matter, how they are created, who owns it &mdash; then a guided tour of an existing Brand Kit, applied live to an unpolished deck.</div>
+
+        <div class="capability-grid four">
+          <article><strong>What</strong><p>Your brand's typography, colour palette, logo variants, and imagery treatment, captured once as a reusable definition Copilot can apply.</p></article>
+          <article><strong>Why</strong><p>Styling stops depending on who happened to build the deck. The same brand decisions land on every slide, every time.</p></article>
+          <article><strong>How</strong><p>Built from assets you already own &mdash; an approved template, a brand style guide, an existing on-brand deck &mdash; then published for others to use.</p></article>
+          <article><strong>Who</strong><p>Owned by brand or marketing operations, not by each deck author. One owner, one source of truth, one place to update it.</p></article>
+        </div>
+
+        <div class="needs"><strong>Files</strong><span class="none">Use your unpolished deck from scenario 1</span><a href="assets/Zava_Corporate_Template.pptx" download>Zava Corporate Template</a></div>
+
+        <ol class="steps">
+          <li><div><strong>Open the deck from scenario 1.</strong> The generic one, before the template was involved &mdash; that contrast is what makes the restyle legible.</div></li>
+          <li><div><strong>Confirm which Brand Kit you have available.</strong> The lab demonstrates the Zava kit; in your own tenant, use the kit your brand team publishes.</div></li>
+          <li><div><strong>Run the prompt.</strong> Watch the restyle land across every slide rather than only the one you are looking at.</div></li>
+          <li><div><strong>Audit the result.</strong> Check the slides that were hardest to style &mdash; tables, charts, and anything with an image behind text.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Apply the Brand Kit</h3><button class="copy-button" type="button" data-copy="ppt-brandkit">Copy</button></div>
+          <pre id="ppt-brandkit">Modify and redesign this presentation by applying the Zava brand kit to this presentation. Restyle every slides in this deck to match the style guides, themes, colors, fonts, layout, logos, graphics, etc. from the brand kit.</pre>
+        </div>
+
+        <div class="activity-note"><strong>Adapting this to your own work:</strong> replace &ldquo;the Zava brand kit&rdquo; with the name of the kit published in your tenant. If your organization has not created one yet, that is the takeaway from this scenario &mdash; the question to bring back is <em>who owns our brand kit</em>, not <em>how do I style this deck</em>.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> A Brand Kit changes who does brand enforcement. If restyling is one prompt, what is the reviewer for?</p>
+      </section>
+
+      <!-- ============ 6 · PPT 4 ============ -->
+      <section class="panel" data-panel="5">
+        <div class="kicker">PowerPoint &middot; Scenario 4</div>
+        <h2>PowerPoint Skills.</h2>
+        <p class="lede">Skills are reusable instructions you save once and run on demand &mdash; the standards you apply to every deck, encoded so they no longer depend on you remembering to apply them.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> What Skills are, how they are created, why they matter, where they live, plus tips and tricks &mdash; seen live against the artifact from scenario 2.</div>
+
+        <div class="needs"><strong>Files</strong><span class="none">Use your on-brand deck from scenario 2</span></div>
+
+        <div class="new-chat-note"><strong>This scenario is demonstrated live.</strong> The Prompt Guide contains no fixed prompt for it &mdash; and deliberately so. In the other seven scenarios you paste a prompt; here, the prompt <em>is</em> the artifact you build. Follow along and build one against your own standards.</div>
+
+        <div class="capability-grid">
+          <article><strong>What</strong><p>Reusable, instruction-based capabilities that give Copilot domain expertise, workflows, and task-specific guidance &mdash; selected from the Copilot pane in PowerPoint.</p></article>
+          <article><strong>Why</strong><p>The check you do inconsistently becomes the check that runs every time. Consistency stops being a discipline problem.</p></article>
+          <article><strong>Where</strong><p>Custom Skills are authored as <strong>SKILL.md</strong> files stored in OneDrive, then toggled on or off in the Copilot pane &mdash; so the instruction is shareable, not trapped in one person's chat history.</p></article>
+        </div>
+
+        <h3 class="map-heading">Tips &amp; tricks</h3>
+        <ul class="check-list">
+          <li><strong>Encode the check you repeat</strong>, not the one you did once. If you have never run it twice, it is a prompt, not a Skill.</li>
+          <li><strong>Define what &ldquo;done&rdquo; looks like.</strong> A Skill with vague success criteria produces vague edits, and you will not notice until a customer does.</li>
+          <li><strong>Keep the scope to a single job.</strong> Narrow Skills compose well; one Skill that tries to do everything fails in ways that are hard to diagnose.</li>
+          <li><strong>Test it against a deck you know is wrong.</strong> If it does not catch the problem you planted, the instruction is not specific enough yet.</li>
+          <li><strong>Name it for the outcome</strong>, so a colleague who did not write it knows when to reach for it.</li>
+        </ul>
+
+        <p class="reflection"><strong>Engagement moment:</strong> Name one review step you perform on every deck and never write down. That is your first Skill.</p>
+      </section>
+
+      <!-- ============ 7 · OTL 1 ============ -->
+      <section class="panel" data-panel="6">
+        <div class="kicker">Outlook &middot; Scenario 1</div>
+        <h2>Inbox prioritization.</h2>
+        <p class="lede">You define what matters. Copilot flags it as it arrives &mdash; and shows you the reasoning behind each flag.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> You define what to prioritize &mdash; Copilot flags what matters as it arrives and shows its reasoning.</div>
+
+        <div class="needs"><strong>Files</strong><span class="none">None &mdash; this runs against your own mailbox</span></div>
+
+        <ol class="steps">
+          <li><div><strong>Open the prioritization settings for Copilot in Outlook.</strong> Find where you state your own criteria.</div></li>
+          <li><div><strong>Enter your instructions.</strong> Use the example below as the shape, but replace the specifics with people and topics that are genuinely yours.</div></li>
+          <li><div><strong>Read the reasoning on a flagged message</strong>, not just the flag. The explanation is where you find out whether your criteria said what you meant.</div></li>
+          <li><div><strong>Correct the criteria, not the individual flags.</strong> If something was wrongly prioritized, the instruction is what needs editing.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Prioritization instructions</h3><button class="copy-button" type="button" data-copy="otl-priority">Copy</button></div>
+          <pre id="otl-priority">Treat anything from my manager or from [agency name] as high priority
+Prioritize messages that include campaign launch dates or media buy approvals</pre>
+        </div>
+
+        <div class="activity-note"><strong>Replace the bracket before you run this.</strong> Put in the agency, partner, or account team you actually work with. Prioritization has value precisely because it is yours &mdash; generic criteria produce generic flags, and a flag you do not trust is worse than no flag.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> Read the reasoning on one flagged message. Would you have accepted that explanation from a chief of staff? If not, the criteria need work &mdash; not the feature.</p>
+      </section>
+
+      <!-- ============ 8 · OTL 2 ============ -->
+      <section class="panel" data-panel="7">
+        <div class="kicker">Outlook &middot; Scenario 2</div>
+        <h2>Govern your calendar.</h2>
+        <p class="lede">State your working rules once, then ask for time instead of hunting for it.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> State your working rules once, then ask for time instead of hunting for it.</div>
+
+        <div class="needs"><strong>Files</strong><span class="none">None &mdash; this runs against your own calendar</span></div>
+
+        <ol class="steps">
+          <li><div><strong>Open your Copilot calendar preferences or instructions in Outlook.</strong></div></li>
+          <li><div><strong>Add the standing rules below.</strong> Adjust the subject-line keywords to ones your organization actually uses.</div></li>
+          <li><div><strong>Then stop searching for time.</strong> Ask for it, using the second prompt.</div></li>
+          <li><div><strong>Check what the rules did after a day or two.</strong> Do that before adding more &mdash; standing rules act while you are not watching.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Calendar instructions</h3><button class="copy-button" type="button" data-copy="otl-calendar">Copy</button></div>
+          <pre id="otl-calendar">Automatically delete canceled meetings from my calendar.
+Automatically accept meetings with "Customer Briefing" in the subject if my calendar is free.
+Automatically follow meetings with "Office Hours" in the subject.
+Automatically decline meetings that conflict with an existing event on my calendar.</pre>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h4>Ask for time, don't hunt for it</h4><button class="copy-button" type="button" data-copy="otl-focus">Copy</button></div>
+          <pre id="otl-focus">Find me an hour of focus time every day next week, in the morning if possible</pre>
+        </div>
+
+        <div class="activity-note"><strong>One of these four rules is stronger than the others.</strong> &ldquo;Automatically decline meetings that conflict with an existing event&rdquo; will decline on your behalf, without you seeing the invitation first &mdash; including the escalation that legitimately should have displaced what was already booked. Start with the rules you would comfortably defend to your team, and add that one once you have watched the others behave.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> Which of these four rules describes a decision you were already making by hand every week?</p>
+      </section>
+
+      <!-- ============ 9 · OTL 3 ============ -->
+      <section class="panel" data-panel="8">
+        <div class="kicker">Outlook &middot; Scenario 3</div>
+        <h2>De-clutter the messy inbox.</h2>
+        <p class="lede">Copilot-assisted analysis and guidance for organizing your inbox. Let AI automate the outcomes; you steer the goals.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> Copilot-assisted analysis and guidance for inbox organization &mdash; let AI automate the outcomes, we steer the goals.</div>
+
+        <div class="needs"><strong>Files</strong><span class="none">None &mdash; this runs against your own mailbox</span></div>
+
+        <ol class="steps">
+          <li><div><strong>Ask for a structure before you build one.</strong> Run the first prompt and read the proposal against how you actually work.</div></li>
+          <li><div><strong>Constrain the proposal.</strong> Note that the prompt states a preference &mdash; shallow, one sub-folder at most. Say what you want, or you will get someone else's filing system.</div></li>
+          <li><div><strong>Then automate one outcome.</strong> The second prompt creates a folder and a rule that routes into it.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Propose a folder structure</h3><button class="copy-button" type="button" data-copy="otl-folders">Copy</button></div>
+          <pre id="otl-folders">Look at my recent emails and suggest a folder structure that would organize it. I don't really like overly nested folder structures and would rather keep it at a folder or 1 sub-folder level max</pre>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Create a folder, then a rule that fills it</h3><button class="copy-button" type="button" data-copy="otl-rule">Copy</button></div>
+          <pre id="otl-rule">First, create a folder titled "Scheduled Prompt Runs". After the folder is created, create a rule that moves messages with "Your scheduled prompt is complete" in the Subject line into that newly created folder</pre>
+        </div>
+
+        <div class="activity-note"><strong>The second prompt is sequenced on purpose.</strong> The folder must exist before a rule can target it, so the prompt says <em>first</em> and <em>after</em> explicitly rather than asking for both at once. It is a small thing that quietly determines whether the request succeeds.</div>
+
+        <div class="new-chat-note"><strong>This connects directly to scenario 4.</strong> &ldquo;Your scheduled prompt is complete&rdquo; is the subject line your morning triage brief will arrive under. You are building the filing before you build the thing being filed &mdash; so the assistant improves your inbox instead of adding to it.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> Copilot proposed the structure; you approved it. Which of those two is the part that actually needed a human?</p>
+      </section>
+
+      <!-- ============ 10 · OTL 4 ============ -->
+      <section class="panel" data-panel="9">
+        <div class="kicker">Outlook &middot; Scenario 4</div>
+        <h2>Build your executive triage assistant.</h2>
+        <p class="lede">A collaborative build &mdash; making Copilot work on your behalf, so a crisp update arrives on schedule, every morning.</p>
+
+        <div class="ga-note"><strong>What to expect:</strong> A collaborative exercise to show how we make Copilot work on our behalf &mdash; a crisp update delivered on schedule, each AM.</div>
+
+        <div class="needs"><strong>Files</strong><span class="none">None &mdash; this reads across your own mail, chats, invitations, and tasks</span></div>
+
+        <ol class="steps">
+          <li><div><strong>Run it manually first.</strong> Never schedule a prompt you have not read the output of. Run it once, now, and judge the result.</div></li>
+          <li><div><strong>Tune the priority list.</strong> Add the people, customers, and commitments specific to your role; remove the categories that produce noise for you.</div></li>
+          <li><div><strong>Then schedule it.</strong> Have it run each morning, so it is waiting before your first meeting rather than after it.</div></li>
+          <li><div><strong>Let scenario 3's rule file it.</strong> The completed run lands under &ldquo;Your scheduled prompt is complete&rdquo; and routes straight into the folder you already created.</div></li>
+        </ol>
+
+        <div class="prompt-card">
+          <div class="prompt-header"><h3>Executive triage assistant &mdash; morning brief</h3><button class="copy-button" type="button" data-copy="otl-triage">Copy</button></div>
+          <pre id="otl-triage">Act as my executive morning triage assistant. Review my Outlook emails, Teams chats, meeting invitations, and Microsoft To Do/Planner tasks from yesterday afternoon through now.
+
+Prioritize:
+- Items received after business hours yesterday that may require my attention today.
+- Messages, emails, meeting invites, or tasks that have not received a response from me.
+- Requests, action items, approvals, customer commitments, blockers, escalations, and follow-ups assigned to me or implied as my responsibility.
+- Any outstanding communications from my manager, leadership, customers, account teams, or frequent collaborators.
+- Calendar events occurring today that require preparation, pre-reads, deliverables, or follow-up actions.
+- Items marked important, urgent, time-sensitive, or with approaching deadlines.
+
+End with a Top 5 Priorities for Today ranked by urgency and business impact.</pre>
+        </div>
+
+        <div class="activity-note"><strong>Read what this prompt is actually doing.</strong> It sets a role, a defined source set, a time window, six ranked priority categories, and a fixed closing format. Every one of those is a decision you would otherwise make yourself at 7am, badly, before coffee. That is the whole argument for encoding it once.</div>
+
+        <p class="reflection"><strong>Reflection:</strong> Compare the Top 5 to what you actually did that day. Where they differ, the interesting question is which list was right.</p>
+      </section>
+
+      <!-- ============ 11 · Q&A ============ -->
+      <section class="panel legacy-panel" data-panel="10">
+        <div class="legacy-kicker">Section 11</div>
+        <h2>Q&amp;A</h2>
+        <p class="legacy-lede">Open floor &mdash; and then the part that decides whether any of this survives contact with next week.</p>
+
+        <div class="phase-card three-up">
+          <article><b>Today</b><p>Set your prioritization criteria and your calendar rules. Both take under five minutes and both start working immediately.</p></article>
+          <article><b>This week</b><p>Run the triage assistant manually for three days. Tune it. Only then schedule it.</p></article>
+          <article><b>This month</b><p>Find out who owns your Brand Kit. If the answer is nobody, that is the most valuable thing you leave this lab with.</p></article>
+        </div>
+
+        <div class="objective-list">
+          <article><span>Bring back the friction</span><p>The scenario that did not work on your content is more useful to discuss than the one that did. Bring it to office hours.</p></article>
+          <article><span>Keep the prompt guide</span><p>Every prompt from this lab is in one document. Adapt the brackets to your brands, agencies, and customers &mdash; that is where the value is.</p></article>
+        </div>
+
+        <div class="ga-note"><strong>A closing note on verification:</strong> every grounded scenario here produces output that <em>looks</em> sourced. Scenario 1 exists partly to make that point &mdash; the prompt fences the last slide to three open questions, and checking whether you got three is a thirty-second habit worth keeping.</div>
+      </section>
+
+      <footer class="guide">
+        <button class="guide-button secondary" type="button" id="previous">Previous</button>
+        <span class="status" id="status">Section 1 of 11</span>
+        <button class="guide-button" type="button" id="next">Continue</button>
+      </footer>
+    </main>
+
+    <aside class="resources" aria-label="Lab resources">
+      <h2>Field kit</h2>
+      <div class="resource-block">
+        <h3>Lab files</h3>
+        <a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar research summary (.docx)</a>
+        <a href="assets/Zava_Corporate_Template.pptx" download>Zava corporate template (.pptx)</a>
+        <a href="assets/Copilot_Prompt_Guide.docx" download>Copilot prompt guide (.docx)</a>
+      </div>
+      <div class="resource-block">
+        <h3>PowerPoint grounding</h3>
+        <a href="https://support.microsoft.com/en-US/PowerPoint/copilot/create-a-new-presentation-with-copilot-in-powerpoint" target="_blank" rel="noreferrer">Create a presentation with Copilot</a>
+        <a href="https://support.microsoft.com/en-US/PowerPoint/copilot/keep-your-presentation-on-brand-with-copilot" target="_blank" rel="noreferrer">Keep your presentation on-brand</a>
+        <a href="https://support.microsoft.com/en-US/Microsoft-365-Copilot/create-and-manage-official-brand-kits-in-the-microsoft-365-copilot-app" target="_blank" rel="noreferrer">Create and manage official Brand kits</a>
+        <a href="https://support.microsoft.com/en-US/PowerPoint/copilot/copilot-in-powerpoint-skills" target="_blank" rel="noreferrer">Use custom Skills in PowerPoint</a>
+      </div>
+      <div class="resource-block">
+        <h3>Outlook grounding</h3>
+        <a href="https://support.microsoft.com/en-US/Outlook/copilot-outlook/prioritize-my-inbox" target="_blank" rel="noreferrer">Prioritize my inbox</a>
+        <a href="https://support.microsoft.com/en-US/Outlook/mail/manage-email-messages-by-using-rules-in-outlook" target="_blank" rel="noreferrer">Manage email messages by using rules</a>
+        <a href="https://support.microsoft.com/en-US/Microsoft-365-Copilot/schedule-your-most-used-copilot-prompts" target="_blank" rel="noreferrer">Schedule your most used prompts</a>
+      </div>
+      <div class="resource-block">
+        <h3>Keep going</h3>
+        <a href="https://support.microsoft.com/en-US/Microsoft-365-Copilot/write-a-great-prompt-in-microsoft-365-copilot" target="_blank" rel="noreferrer">Write a great prompt</a>
+        <p>Every link here was verified against a live Microsoft page. Two things demonstrated in this lab &mdash; Copilot <strong>calendar preferences</strong> and asking Copilot to <strong>find focus time</strong> &mdash; have no published Microsoft support article yet, so nothing is linked for them rather than pointing you at an approximation.</p>
+      </div>
+    </aside>
+  </div>
+
+  <p class="fineprint">
+    Microsoft 365 Copilot enablement lab &mdash; PowerPoint and Outlook. All lab data is fictional and created for Microsoft 365 Copilot demonstration purposes only; Zava and Project Northstar do not represent any real company, person, research programme, or financial result. Feature availability varies by licence, tenant configuration, and release channel &mdash; confirm what is enabled for you before relying on any scenario.
+  </p>
+
+  <script>
+    const panels = [...document.querySelectorAll("[data-panel]")];
+    const navButtons = [...document.querySelectorAll("[data-nav]")];
+    const progressLabel = document.getElementById("progress-label");
+    const progressFill = document.getElementById("progress-fill");
+    const status = document.getElementById("status");
+    const previous = document.getElementById("previous");
+    const next = document.getElementById("next");
+    let current = 0;
+
+    function setSection(index, updateHash = true) {
+      current = Math.max(0, Math.min(index, panels.length - 1));
+      panels.forEach((panel, panelIndex) => panel.classList.toggle("is-active", panelIndex === current));
+      navButtons.forEach((button, buttonIndex) => button.classList.toggle("is-active", buttonIndex === current));
+      const label = `Section ${current + 1} of ${panels.length}`;
+      progressLabel.textContent = label;
+      status.textContent = label;
+      progressFill.style.width = `${((current + 1) / panels.length) * 100}%`;
+      previous.disabled = current === 0;
+      next.textContent = current === panels.length - 1 ? "Restart" : "Continue";
+      if (updateHash) {
+        history.replaceState(null, "", `#section-${current + 1}`);
+        document.querySelector(".stage").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    navButtons.forEach((button) => button.addEventListener("click", () => setSection(Number(button.dataset.nav))));
+    previous.addEventListener("click", () => setSection(current - 1));
+    next.addEventListener("click", () => setSection(current === panels.length - 1 ? 0 : current + 1));
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copy);
+        if (!target) return;
+        const original = button.textContent;
+        try {
+          await navigator.clipboard.writeText(target.textContent.trim());
+          button.textContent = "Copied";
+        } catch {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          button.textContent = "Select and copy";
+        }
+        setTimeout(() => { button.textContent = original; }, 1600);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.target.matches("input, textarea, [contenteditable='true']")) return;
+      if (event.key === "ArrowRight") setSection(current + 1);
+      if (event.key === "ArrowLeft") setSection(current - 1);
+    });
+
+    const hashIndex = Number((location.hash.match(/#section-(\d+)/) || [])[1]);
+    setSection(Number.isFinite(hashIndex) && hashIndex > 0 ? hashIndex - 1 : 0, false);
+  </script>
+</body>
+</html>
