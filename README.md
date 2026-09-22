@@ -1,10 +1,29 @@
-# Copilot in Action — PowerPoint & Outlook
+# Copilot in Action — Learn and practice
 
-A reusable, customer-agnostic Microsoft 365 Copilot lab: *Making Copilot real across PowerPoint and Outlook.*
+A reusable, customer-agnostic Microsoft 365 Copilot learning site: from a first prompt to practical work across Microsoft 365.
 
-A single-page walkthrough of eight scenarios, with every prompt copy-ready and every lab file downloadable in the place it is actually used. No customer name, no programme branding, no session numbering — point any engagement at it.
+The original PowerPoint and Outlook lab still contains its eight scenarios, unchanged prompts, and downloadable files. The beginner path adds 13 core guides and three optional explorations with fictional practice content, numbered steps, checkable outcomes, practice alternatives, and direct public Microsoft sources.
 
 **Live site:** https://moinster.github.io/copilot-in-action/
+
+## Beginner path
+
+`start.html` is the beginner entry point, linked prominently from the existing lab. It does not renumber or replace the original `index.html#section-N` links.
+
+| Guides | Contents |
+|---|---|
+| 01-05 | Work-account setup, first prompt, goal/context/source/expectations, iteration, grounding, review and privacy |
+| 06-12 | Word, Excel, PowerPoint, Outlook, Teams, OneNote, Copilot Pages and the distinction from Loop |
+| 13-15 | Optional Create/image generation, agents including Researcher/Analyst orientation, Copilot Notebooks |
+| 16 | Cross-app challenge and self-check |
+
+Core practice takes approximately 90 minutes. The audience already has Microsoft 365 Copilot licenses: guidance focuses on using the product, not choosing or comparing licenses. Practical notes cover app interfaces, source permissions, editing modes, and meeting transcription. Optional guides are enrichment, not a separate licensing tier. All practice data is fictional. The site never connects to Microsoft 365 or sends prompts.
+
+Navigation supports direct lesson hashes, browser back/forward, a show-all reading mode, keyboard access, clipboard fallback, and printing all lessons. Check-offs last only for the current visit; bookmarking a lesson preserves its address, not completed status. With JavaScript disabled, all content remains readable and prompts can be copied manually.
+
+Public Microsoft Learn and Support sources are linked within the guides, reviewed for the 22 September 2026 edition. This is everyday foundational coverage, not an exhaustive feature or licensing catalog.
+
+The existing downloadable `Copilot_Prompt_Guide.docx` covers only the original eight scenarios; it is not advertised as containing the beginner lessons. Use the beginner page's Print all guides control for those.
 
 ## What's here
 
@@ -41,7 +60,7 @@ Everything else — the Zava brand and Project Northstar research — is fiction
 
 ## Prompt fidelity
 
-Every prompt rendered on the site matches the bundled Prompt Guide verbatim, with two presentational changes:
+Every prompt in the original eight-scenario lab matches the bundled Prompt Guide verbatim, with two presentational changes:
 
 - The guide's `<agency name>` placeholder is rendered as `[agency name]`, matching the bracket convention used elsewhere.
 - Smart quotes are rendered as straight quotes so the copied text pastes cleanly into Copilot.
@@ -59,7 +78,8 @@ The site carries no customer name, no delivery-programme branding, and no custom
 ## Structure
 
 ```
-index.html                 Self-contained page — markup, styles, and behaviour
+index.html                 Original eight-scenario lab and beginner-path entry links
+start.html                 Self-contained beginner guide with inline styles and behaviour
 .nojekyll                  Serve files verbatim from GitHub Pages
 assets/                    Attendee files
 ```

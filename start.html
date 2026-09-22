@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot essentials | Copilot in Action</title>
+  <meta name="description" content="Start with zero Copilot knowledge. Learn prompting, grounding, safe review, and everyday Microsoft 365 app workflows with step-by-step guides and fictional practice content.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='4' y='25' font-size='28'%3EC%3C/text%3E%3C/svg%3E">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font: 1rem/1.65 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+    a { color: var(--cp-link); text-underline-offset: 3px; }
+    button, input { font: inherit; }
+    button, .button { display: inline-block; padding: .65rem 1rem; border: 1px solid var(--cp-border-strong); border-radius: .625rem; color: var(--cp-text); background: var(--cp-surface); cursor: pointer; text-decoration: none; font-weight: 600; }
+    button:hover, .button:hover { border-color: var(--cp-accent); background: var(--cp-accent-soft); }
+    .primary { background: var(--cp-accent); border-color: var(--cp-accent); color: var(--cp-accent-fg); }
+    .primary:hover { background: var(--cp-accent-hover); color: var(--cp-accent-fg); }
+    button:disabled { opacity: .5; cursor: default; }
+    :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
+    [hidden], .enhanced { display: none !important; }
+    .js .enhanced { display: flex !important; }
+    .skip { position: absolute; left: -10000px; }
+    .skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--cp-surface); padding: 1rem; }
+    .topbar { padding: 1rem max(1rem, calc((100vw - 1360px) / 2)); border-bottom: 3px solid var(--cp-accent); background: var(--cp-surface); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
+    .brand { text-decoration: none; color: var(--cp-text); font-size: 1.1rem; font-weight: 800; }
+    .brand span { display: block; color: var(--cp-text-muted); font-size: .8rem; font-weight: 400; }
+    .topbar nav, .toolbar, .controls { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+    .shell { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 1.5rem; max-width: 1360px; margin: auto; padding: 1.5rem 1rem; }
+    aside { position: sticky; top: 1rem; align-self: start; max-height: calc(100vh - 2rem); overflow: auto; background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: 1.25rem; }
+    aside h2 { font-size: 1.05rem; margin: 0; }
+    aside p { margin: .5rem 0; font-size: .85rem; }
+    .group-label, .eyebrow { text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; font-weight: 800; color: var(--cp-accent); }
+    .group-label { margin-top: 1.3rem; }
+    .lesson-nav a { display: block; padding: .4rem .6rem; border-left: 3px solid var(--cp-border); text-decoration: none; color: var(--cp-text); font-size: .92rem; margin: .15rem 0; }
+    .lesson-nav a[aria-current="step"] { border-color: var(--cp-accent); background: var(--cp-accent-soft); font-weight: 700; }
+    .lesson-nav a[data-done="true"]::after { content: " - done"; font-size: .7rem; color: var(--cp-text-muted); }
+    main { min-width: 0; }
+    .intro, .lesson, .help { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: 16px; padding: clamp(1.25rem, 3vw, 2.5rem); margin-bottom: 1.25rem; }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -.025em; }
+    h1 { font-size: clamp(2rem, 4vw, 3.2rem); margin: .6rem 0 1rem; max-width: 20ch; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin: .5rem 0 1rem; }
+    h3 { font-size: 1.12rem; margin: 1.75rem 0 .75rem; }
+    p { margin: .75rem 0; }
+    .lede { color: var(--cp-text-muted); font-size: 1.13rem; max-width: 70ch; }
+    .muted, .meta, .sources { color: var(--cp-text-muted); font-size: .88rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .badge { background: var(--cp-surface-soft); border: 1px solid var(--cp-border); padding: .2rem .6rem; border-radius: .625rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+    .card { padding: 1.1rem; border: 1px solid var(--cp-border); border-radius: .625rem; background: var(--cp-bg-elevated); }
+    .card h3 { margin: 0 0 .5rem; }
+    .callout { background: var(--cp-accent-soft); border-left: 4px solid var(--cp-accent); padding: 1rem 1.25rem; margin: 1.25rem 0; }
+    .check { background: var(--cp-surface-soft); border-left: 4px solid var(--cp-border-strong); padding: 1rem 1.25rem; margin: 1.25rem 0; }
+    .check h3, .callout h3 { margin: 0 0 .5rem; }
+    ol, ul { padding-left: 1.5rem; }
+    li { margin: .6rem 0; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; font: .93rem/1.6 Consolas, "Courier New", Courier, monospace; margin: 0; }
+    .prompt { border: 1px solid var(--cp-border); border-radius: .625rem; margin: 1rem 0; background: var(--cp-bg-elevated); overflow: hidden; }
+    .prompt-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; align-items: center; padding: .65rem 1rem; border-bottom: 1px solid var(--cp-border); color: var(--cp-text-muted); font-size: .85rem; }
+    .prompt pre { padding: 1rem; }
+    .prompt button { font-size: .8rem; padding: .35rem .65rem; }
+    .sources { border-top: 1px solid var(--cp-border); margin-top: 1.5rem; padding-top: 1rem; }
+    .sources a { display: inline-block; margin-right: 1rem; }
+    .completion { display: flex; align-items: center; gap: .7rem; margin-top: 1.5rem; font-weight: 600; }
+    .completion input { width: 1.15rem; height: 1.15rem; accent-color: var(--cp-accent); }
+    .controls { justify-content: space-between; padding: 1rem 0; }
+    #copy-status { min-height: 1.65em; color: var(--cp-text-muted); }
+    progress { width: 100%; accent-color: var(--cp-accent); height: .7rem; }
+    summary { cursor: pointer; font-weight: 650; padding: .7rem 0; }
+    details { border-top: 1px solid var(--cp-border); margin-top: 1rem; }
+    dl { display: grid; grid-template-columns: minmax(100px, .3fr) 1fr; gap: .75rem 1rem; }
+    dt { font-weight: 700; }
+    dd { margin: 0; color: var(--cp-text-muted); }
+    footer { padding: 1rem; max-width: 1360px; margin: auto; }
+    .lesson, .help { scroll-margin-top: 1rem; }
+    .print-note { display: none; }
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      aside { position: static; max-height: none; }
+      .lesson-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .5rem; }
+      .lesson-nav .group-label { grid-column: 1 / -1; }
+    }
+    @media (max-width: 520px) {
+      .grid, dl { grid-template-columns: 1fr; }
+      .topbar nav { font-size: .9rem; }
+      .lesson-nav a { font-size: .85rem; }
+      dd { margin-bottom: .75rem; }
+    }
+    @media print {
+      .topbar, aside, .intro .toolbar, .controls, .completion, #copy-status, .prompt button, .no-print { display: none !important; }
+      .shell { display: block; padding: 0; }
+      .lesson[hidden] { display: block !important; }
+      .intro, .lesson, .help { border-radius: 0; border: 0; padding: 1rem 0; }
+      .lesson { break-before: page; }
+      .prompt, .check { break-inside: avoid; }
+      .print-note { display: block; }
+      a { color: var(--cp-text); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#learning">Skip to the learning path</a>
+  <header class="topbar">
+    <a class="brand" href="index.html">Copilot in Action<span>Practical skills. Your judgment stays in charge.</span></a>
+    <nav aria-label="Site"><a href="#learning">Beginner path</a><a href="index.html">PowerPoint &amp; Outlook lab</a><a href="#help">Help &amp; glossary</a></nav>
+  </header>
+  <div class="shell">
+    <aside aria-label="Learning path navigation">
+      <h2>Your learning path</h2>
+      <p>Start at 01. Continue in order, or jump to the app you use today.</p>
+      <nav class="lesson-nav" aria-label="Guides">
+        <p class="group-label">Foundations</p>
+        <a href="#start">01 &middot; Meet Copilot</a>
+        <a href="#first-prompt">02 &middot; Your first prompt</a>
+        <a href="#better-prompts">03 &middot; Make it better</a>
+        <a href="#grounding">04 &middot; Give it sources</a>
+        <a href="#review">05 &middot; Review &amp; protect</a>
+        <p class="group-label">Everyday app skills</p>
+        <a href="#word">06 &middot; Word</a>
+        <a href="#excel">07 &middot; Excel</a>
+        <a href="#powerpoint">08 &middot; PowerPoint</a>
+        <a href="#outlook">09 &middot; Outlook</a>
+        <a href="#teams">10 &middot; Teams</a>
+        <a href="#onenote">11 &middot; OneNote</a>
+        <a href="#pages">12 &middot; Pages &amp; Loop</a>
+        <p class="group-label">Explore next</p>
+        <a href="#create">13 &middot; Create an image</a>
+        <a href="#agents">14 &middot; Meet agents</a>
+        <a href="#notebooks">15 &middot; Copilot Notebooks</a>
+        <p class="group-label">Bring it together</p>
+        <a href="#finish">16 &middot; Try it yourself</a>
+      </nav>
+      <div class="enhanced" style="flex-direction:column; align-items:stretch">
+        <p id="progress-label">0 of 13 core guides completed</p>
+        <progress id="progress" max="13" value="0" aria-labelledby="progress-label"></progress>
+        <p id="optional-progress">0 of 3 optional guides completed</p>
+        <p class="muted">Check-offs last for this visit only. Bookmark a guide's address to return to that lesson.</p>
+      </div>
+    </aside>
+    <main id="learning">
+      <section class="intro" aria-labelledby="course-title">
+        <p class="eyebrow">Microsoft 365 Copilot &middot; Start here</p>
+        <h1>From first question to everyday confidence.</h1>
+        <p class="lede">No AI knowledge required. Learn to ask, supply context, check an answer, and use Copilot in the tools you already work in. Every exercise uses fictional data and ends with something you can check yourself.</p>
+        <div class="meta"><span class="badge">13 core guides</span><span class="badge">3 optional explorations</span><span class="badge">About 90 minutes for the core path</span></div>
+        <p>Take it in three sittings: foundations, app practice, and the final challenge. Times are estimates, not a speed test. Mark a guide complete after you have practiced the workflow and checked its result.</p>
+        <div class="callout"><strong>Before you start:</strong> This path is for people with a Microsoft 365 Copilot license. Sign in with your work account and keep these guides open in a second tab. We will focus on using Copilot, not choosing a plan. Button names and layouts may differ between web and desktop apps.</div>
+        <p class="muted">This is a guide, not a connected Copilot app. Copy prompts into your organization's approved Copilot experience. No sign-in, customer content, or API key is needed on this site.</p>
+        <div class="toolbar"><a class="button primary" href="#start">Start with the basics</a><button class="enhanced" id="view-all" type="button" aria-pressed="false">Show all guides</button><button class="enhanced" id="print" type="button">Print all guides</button></div>
+        <noscript><p>All guides are available below. Select prompt text to copy it manually. Browser Print will include the full guide.</p></noscript>
+        <p class="print-note">Copilot essentials: https://moinster.github.io/copilot-in-action/start.html</p>
+        <p id="copy-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <article class="lesson" id="start" data-core="true" aria-labelledby="title-start">
+        <p class="eyebrow">01 &middot; Foundations &middot; 5 minutes</p>
+        <h2 id="title-start" tabindex="-1">Meet your assistant. Keep your judgment.</h2>
+        <p><strong>You will learn:</strong> what Copilot helps with, where to begin, and what it cannot decide for you.</p>
+        <div class="grid">
+          <div class="card"><h3>Copilot Chat</h3><p>A conversation: ask questions, brainstorm, summarize supplied material, and draft content. You give instructions in everyday language. A message you send is a <strong>prompt</strong>.</p></div>
+          <div class="card"><h3>Copilot inside an app</h3><p>Help in the context of a document, workbook, presentation, email, or meeting. Some experiences suggest content; others can edit the open artifact. Check the mode before asking for changes.</p></div>
+        </div>
+        <h3>Do this</h3>
+        <ol>
+          <li>Open <a href="https://m365.cloud.microsoft/">the Microsoft 365 Copilot app</a> and sign in with your <strong>work account</strong>. If your organization provides a different approved entry point, use that.</li>
+          <li>Open Chat and find the message box. Check the signed-in account. If access is blocked, use your organization's support process rather than switching to a personal account with work data.</li>
+          <li>Start a new conversation. Notice the new-chat control, the message history, and any source or file-attachment controls available to you. Labels vary; you do not need every control to start.</li>
+          <li>Keep these guides in a second tab. You will copy a prompt from the next lesson into Chat, not type private information into this website.</li>
+        </ol>
+        <div class="check"><h3>What good looks like</h3><p>You can open an approved work conversation and explain that Copilot generates a useful draft, not a guaranteed fact or automatic approval.</p></div>
+        <p><strong>Know the boundary:</strong> it can misunderstand, omit details, and confidently invent information. It cannot infer every unstated business rule. A draft task list is not a set of assigned tasks; a draft email is not a sent email.</p>
+        <p><strong>If you are stuck:</strong> confirm you are signed in with the right work account and ask your organization's support team about the app entry point. There is no separate sign-in to this guide.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-microsoft-365-copilot-chat">Start with Copilot Chat</a><a href="https://learn.microsoft.com/en-us/copilot/overview">Copilot overview</a></p>
+      </article>
+
+      <article class="lesson" id="first-prompt" data-core="true" aria-labelledby="title-first-prompt">
+        <p class="eyebrow">02 &middot; Foundations &middot; 5 minutes</p>
+        <h2 id="title-first-prompt" tabindex="-1">Get your first useful answer.</h2>
+        <p><strong>You will learn:</strong> to turn a small set of notes into a usable draft. <strong>Need:</strong> Copilot Chat; no file or work-data search required.</p>
+        <h3>Do this</h3>
+        <ol>
+          <li>Start a new chat. Copy the complete prompt below, including the fictional notes.</li>
+          <li>Paste it into Copilot's message box and send it. Read the whole answer before judging it.</li>
+          <li>Compare its claims with the notes. A useful answer can be short; it does not need to sound impressive.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; summarize</strong><button class="enhanced" type="button" data-copy="prompt-first">Copy prompt</button></div>
+          <pre id="prompt-first">Write a short status update for the organizer of this fictional employee welcome session.
+Use only the notes below. Give me three bullets: confirmed facts, next action, and open decisions.
+Do not invent dates, approvals, or completed work.
+
+Notes:
+- A 30-minute welcome session is planned for 12 new colleagues on 14 October; the year is not specified.
+- Alex coordinates the session.
+- Priya will draft the handout by 8 October.
+- The budget limit is 600 USD; approved spending is not specified.
+- No room is booked.
+- Online versus in-person delivery is still undecided.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>The session is <strong>planned</strong>, not fully confirmed. The room is not booked, 600 USD is a limit rather than approved spending, and the format is undecided. The answer must not supply a year, claim Priya finished, or say invitations were sent.</p></div>
+        <p><strong>Try one follow-up:</strong> "Make it two sentences, keeping the uncertainty about the room and delivery format." Send it in the same chat so Copilot can use the previous exchange.</p>
+        <p><strong>If it invents a fact:</strong> point out the exact error and ask for a correction using only the notes. Recheck the correction; do not assume the second answer is right.</p>
+        <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Prompting and iteration</a></p>
+      </article>
+
+      <article class="lesson" id="better-prompts" data-core="true" aria-labelledby="title-better-prompts">
+        <p class="eyebrow">03 &middot; Foundations &middot; 7 minutes</p>
+        <h2 id="title-better-prompts" tabindex="-1">Give the task a clear brief.</h2>
+        <p><strong>You will learn:</strong> a reusable prompting pattern and how to improve a response without starting over.</p>
+        <div class="grid">
+          <div class="card"><h3>Goal</h3><p>What should Copilot do? Draft, explain, compare, summarize, analyze, or brainstorm.</p></div>
+          <div class="card"><h3>Context</h3><p>Who is this for, and why? State the audience, situation, and decision you need to make.</p></div>
+          <div class="card"><h3>Source</h3><p>Which notes, file, messages, or public sources should it use? Name or attach material it can actually access.</p></div>
+          <div class="card"><h3>Expectations</h3><p>Specify format, length, tone, boundaries, and how to handle missing information.</p></div>
+        </div>
+        <p>Compare <em>"Help with an event"</em> with the prompt below. Not every request needs all four elements, and there is no magic order.</p>
+        <ol>
+          <li>Use the same fictional event from guide 02 or start fresh with the complete prompt below.</li>
+          <li>Ask for a bounded output. Then change one thing at a time: length, audience, format, or depth.</li>
+          <li>Keep refining the same task in one conversation. Start a new chat for a different project to avoid carrying over irrelevant assumptions.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; plan</strong><button class="enhanced" type="button" data-copy="prompt-plan">Copy prompt</button></div>
+          <pre id="prompt-plan">Draft a proposed agenda for a fictional 30-minute welcome session for 12 new colleagues.
+The goal is to help them meet one another and know where to ask for help.
+The only confirmed inputs are the duration and audience size. The delivery format is not decided.
+Return a table with activity, minutes, and purpose. The minutes must total 30.
+Keep activities usable online or in person. Label the agenda as a proposal, not an approved plan.</pre>
+        </div>
+        <div class="prompt"><div class="prompt-head"><strong>Then refine in the same chat</strong><button class="enhanced" type="button" data-copy="prompt-refine">Copy follow-up</button></div>
+          <pre id="prompt-refine">Revise the proposal so introductions take no more than 8 minutes.
+Keep the whole agenda at 30 minutes. Explain what you changed in one sentence.
+Separate any new assumptions from the agenda.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>Add the minutes yourself: they must total 30. Are introductions 8 minutes or less? Does the answer preserve the undecided format? Ask for changes if it does not.</p></div>
+        <p><strong>Reuse the pattern:</strong> "Do [task] for [audience/purpose], using [source]. Return [format/length]. Do not [boundary]. If something is missing, [ask or flag it]." Replace every bracket before sending.</p>
+        <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Goal, context, source, expectations</a></p>
+      </article>
+
+      <article class="lesson" id="grounding" data-core="true" aria-labelledby="title-grounding">
+        <p class="eyebrow">04 &middot; Foundations &middot; 7 minutes</p>
+        <h2 id="title-grounding" tabindex="-1">Give it the right information.</h2>
+        <p><strong>You will learn:</strong> the difference between public-web research, supplied content, and organizational context. <strong>Grounding</strong> means supplying or retrieving information to base an answer on; it reduces guesswork, not the need to review.</p>
+        <div class="grid">
+          <div class="card"><h3>Public web</h3><p>Useful for public information and research where enabled. Ask for source links and check their dates. A web answer is not an answer about your internal project.</p></div>
+          <div class="card"><h3>Your work and supplied files</h3><p>Use work context to ask about information you have permission to access, or explicitly attach a file or provide notes. Inside an app, identify the document or conversation you mean. Naming a file is not proof that Copilot read it.</p></div>
+        </div>
+        <h3>Do this</h3>
+        <ol>
+          <li>Download the <a href="assets/Northstar_Consumer_Research_Summary.docx" download>fictional Northstar research summary</a>. This is the same practice document used in the original lab.</li>
+          <li>In a new work chat, use the available attachment or content-reference control to select that document. If your experience references cloud files, save the practice copy to your work OneDrive or SharePoint first. Confirm the correct file is shown.</li>
+          <li>Send the prompt below. Open the original document beside the response, not only the generated citations.</li>
+          <li>For a separate public-web exercise, start a new chat and ask: "Find Microsoft's current guidance on writing Copilot prompts. Link the official source and separate its advice from your suggestions." If web access is unavailable, read the official source linked below instead.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; summarize a file</strong><button class="enhanced" type="button" data-copy="prompt-source">Copy prompt</button></div>
+          <pre id="prompt-source">Use only the attached Project Northstar Consumer Research Summary.
+List its four headline findings, followed by only the open questions explicitly listed in the document.
+Point me to the supporting section or text for each finding.
+Do not add outside research or turn assumptions into facts.
+If you cannot access the file, tell me instead of guessing.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>The document has four headline findings and three open questions. Check the actual wording, not just the count. A citation can be incomplete or point to material that does not support the claim.</p></div>
+        <p><strong>If attachment is unavailable:</strong> paste a small permitted excerpt, say "use only the excerpt below," and narrow the task to that excerpt. Do not imply Copilot saw the whole file. Never remove protection or move real work content to a personal service to make an exercise work.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-content-to-microsoft-365-copilot-chat-prompts">Add content to Chat</a><a href="https://learn.microsoft.com/en-us/copilot/overview">Work and web grounding</a><a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Prompting guidance</a></p>
+      </article>
+
+      <article class="lesson" id="review" data-core="true" aria-labelledby="title-review">
+        <p class="eyebrow">05 &middot; Foundations &middot; 5 minutes</p>
+        <h2 id="title-review" tabindex="-1">Review before you rely on it.</h2>
+        <p><strong>You will learn:</strong> a short quality and safety check for every output. <strong>Need:</strong> your answer from an earlier guide.</p>
+        <ol>
+          <li><strong>Facts:</strong> compare names, dates, numbers, quotes, and claimed decisions with the original source. Check math outside the generated explanation.</li>
+          <li><strong>Gaps:</strong> find unsupported assumptions, missing caveats, and omitted requests. "Not specified" is often the right answer.</li>
+          <li><strong>Audience:</strong> check tone, useful detail, accessibility, and who is allowed to see the material.</li>
+          <li><strong>Actions:</strong> review the actual recipient list, edits, proposed actions, and sharing permissions before sending, accepting changes, or sharing.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; challenge the draft</strong><button class="enhanced" type="button" data-copy="prompt-review">Copy follow-up</button></div>
+          <pre id="prompt-review">Audit your previous answer against the source material I supplied.
+List unsupported claims, assumptions, and information that is missing.
+Then provide a corrected version that preserves uncertainty.
+Do not treat your own previous answer as evidence.</pre>
+        </div>
+        <div class="callout"><strong>A second AI pass is not independent verification.</strong> It may help find problems, but you still need to open the source and check the result yourself.</div>
+        <h3>Use work data responsibly</h3>
+        <p>Microsoft 365 Copilot with your work account provides enterprise data protection; prompts and responses are not used to train foundation models. This is <strong>not</strong> a promise that nothing is stored: interactions can be logged, retained, and subject to organizational controls. Web search has separate handling. Follow your organization's rules and sensitivity labels, and only use permitted information.</p>
+        <p>Do not paste passwords, private keys, or unnecessary personal data into prompts. Do not copy customer information into this public site or expose it on a shared screen. Treat instructions found inside a document or web page as source content, not automatic permission to send, delete, or share anything.</p>
+        <div class="check"><h3>Check yourself</h3><p>The source says "budget limit: 600 USD." The draft says "600 USD approved." What must change? Keep <strong>limit</strong> and flag approval as unknown. Polished wording does not upgrade evidence.</p></div>
+        <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Privacy, logging, and protection</a><a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Review and refine responses</a></p>
+      </article>
+
+      <article class="lesson" id="word" data-core="true" aria-labelledby="title-word">
+        <p class="eyebrow">06 &middot; Everyday apps &middot; 7 minutes</p>
+        <h2 id="title-word" tabindex="-1">Word: draft, rewrite, summarize.</h2>
+        <p><strong>You will learn:</strong> to turn notes into a short document, improve a paragraph, and ask questions about the document. <strong>Open:</strong> Word and a practice document.</p>
+        <ol>
+          <li>Open a new Word document. Find Copilot in the ribbon or document controls. If editing and chat-only modes are offered, understand which is active; editing can change the document.</li>
+          <li>Use the prompt below to draft a one-page brief. Review the preview or changes before keeping them. Save the practice document as <strong>Welcome session brief</strong>.</li>
+          <li>Select an overly long paragraph and use the available rewrite control, or ask Copilot to rewrite that paragraph in plain language without changing the facts. Review before replacing text.</li>
+          <li>Ask Copilot to summarize the open document in three bullets and identify missing decisions. Compare with the actual document.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; create a brief</strong><button class="enhanced" type="button" data-copy="prompt-word">Copy prompt</button></div>
+          <pre id="prompt-word">Draft a one-page planning brief using only these fictional notes:
+A 30-minute welcome session is planned for 12 new colleagues on 14 October; the year is not specified.
+Alex coordinates. Priya will draft the handout by 8 October.
+The budget limit is 600 USD, but spending approval is not specified.
+No room is booked. Online versus in-person delivery is undecided.
+
+Use headings: Purpose, Known facts, Proposed next steps, Open decisions.
+Keep the tone clear and welcoming. Label suggestions as proposals.
+Do not invent approvals, a room, a meeting link, or a year.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>All four headings appear. Proposed steps are separate from facts. The room, format, year, and spending approval remain unresolved. A summary must not make the source more certain.</p></div>
+        <p><strong>Another way to practice:</strong> draft in work Chat, then paste the reviewed answer into Word yourself. Notice the difference: a Chat response is suggested content; an in-app edit changes the document.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/word/welcome-to-copilot-in-word">Copilot in Word</a><a href="https://support.microsoft.com/en-us/word/copilot/draft-and-add-content-with-copilot-in-word">Draft and add content</a></p>
+      </article>
+
+      <article class="lesson" id="excel" data-core="true" aria-labelledby="title-excel">
+        <p class="eyebrow">07 &middot; Everyday apps &middot; 8 minutes</p>
+        <h2 id="title-excel" tabindex="-1">Excel: ask questions of a small table.</h2>
+        <p><strong>You will learn:</strong> to analyze data, explain a formula, and check a result. <strong>Open:</strong> a new Excel practice workbook, not a live financial model.</p>
+        <ol>
+          <li>Copy the tab-separated practice data below and paste it into cell A1. Check that it occupies three columns, A through C. If it lands in one column, use your app's split-text/import control with <strong>tab</strong> as the separator.</li>
+          <li>Select the data and use <strong>Insert &gt; Table</strong> (with headers) for a clear practice layout. Check the amounts are numbers, not text. All amounts are USD.</li>
+          <li>Open Copilot and ask the question below. If a mode can edit the workbook, inspect proposed or applied changes; use a copy and undo unwanted edits. Editing requires Automatic calculation in current guidance.</li>
+          <li>Ask for a formula for <strong>Remaining = Planned minus Actual</strong> and an explanation. Check one row yourself before filling it down. Optionally request a chart comparing Planned and Actual by category.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Fictional practice data &middot; paste into A1</strong><button class="enhanced" type="button" data-copy="data-excel">Copy data</button></div>
+          <pre id="data-excel">Category	Planned	Actual
+Venue	250	200
+Materials	120	90
+Refreshments	180	210
+Signage	50	55</pre>
+        </div>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; analyze</strong><button class="enhanced" type="button" data-copy="prompt-excel">Copy prompt</button></div>
+          <pre id="prompt-excel">Using this practice budget table, calculate total Planned, total Actual, and total Remaining as Planned minus Actual.
+Identify categories over plan and by how much.
+Explain the calculation and suggest a formula for Remaining for each row.
+Do not infer why spending changed or whether spending was approved.
+Ask before making changes if your current mode supports that.</pre>
+        </div>
+        <div class="check"><h3>Your answer key</h3><p>Planned = <strong>600</strong>; Actual = <strong>555</strong>; Remaining = <strong>45 USD</strong>. Refreshments are 30 over plan and Signage is 5 over plan. With this A1 layout, <code>=B2-C2</code> gives Venue's remaining 50. A table may use equivalent structured references.</p></div>
+        <p><strong>Check independently:</strong> calculate the totals with SUM in Excel. You can also ask work Chat to explain this fictional table, but remember that Chat's answer is not a workbook edit.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/excel/copilot/get-started-with-copilot-in-excel">Start in Excel</a><a href="https://support.microsoft.com/en-us/excel/copilot/frequently-asked-questions-about-copilot-in-excel">Excel requirements and limitations</a></p>
+      </article>
+
+      <article class="lesson" id="powerpoint" data-core="true" aria-labelledby="title-powerpoint">
+        <p class="eyebrow">08 &middot; Everyday apps &middot; 7 minutes</p>
+        <h2 id="title-powerpoint" tabindex="-1">PowerPoint: turn a source into a story.</h2>
+        <p><strong>You will learn:</strong> to create a first draft and check its content before polishing. <strong>Open:</strong> PowerPoint and the brief from Word. The <a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar practice document</a> is also available for a separate research-based exercise.</p>
+        <ol>
+          <li>Open PowerPoint and find Copilot's presentation-creation controls. Save the approved practice source to your work OneDrive or SharePoint if required by your experience.</li>
+          <li>Where file-based creation is available, select your <strong>Welcome session brief</strong> as the source and use the prompt below. Confirm it is actually attached or referenced.</li>
+          <li>Review the proposed outline where offered. Create the draft, then read each slide and any speaker notes against the source.</li>
+          <li>Ask for a shorter title or clearer slide, then inspect the result. Keep content review separate from checking layout, contrast, accessibility, and visuals.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; create from your brief</strong><button class="enhanced" type="button" data-copy="prompt-powerpoint">Copy prompt</button></div>
+          <pre id="prompt-powerpoint">Create a four-slide presentation using only the attached Welcome session brief.
+The audience is the session organizer.
+Use these topics: purpose, known facts, proposed next steps, and open decisions.
+Keep each slide concise. Label proposals and unknowns clearly.
+Do not invent a meeting link, booked venue, budget approval, or missing dates.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>The draft has the requested four-topic structure and distinguishes facts from proposals. Images are illustrative, not evidence. Check notes as well as visible slide text for invented details.</p></div>
+        <p><strong>If file referencing or creation is unavailable:</strong> paste the fictional brief into work Chat and ask for a four-slide outline, then build the slides yourself. File-reference support differs between creation experiences, including newer editing/agent modes; a missing control is not proof the file is wrong.</p>
+        <p><strong>Go deeper:</strong> the original lab covers <a href="index.html#section-3">grounded creation</a>, <a href="index.html#section-4">templates</a>, and feature-dependent <a href="index.html#section-5">Brand Kits</a> and <a href="index.html#section-6">Skills</a>.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/powerpoint/copilot/create-a-new-presentation-with-copilot-in-powerpoint">Create a presentation and review it</a></p>
+      </article>
+
+      <article class="lesson" id="outlook" data-core="true" aria-labelledby="title-outlook">
+        <p class="eyebrow">09 &middot; Everyday apps &middot; 7 minutes</p>
+        <h2 id="title-outlook" tabindex="-1">Outlook: catch up and draft a reply.</h2>
+        <p><strong>You will learn:</strong> thread summaries, drafting, and tone review. <strong>Open:</strong> Outlook with your primary work mailbox. Use an ordinary practice draft rather than a shared mailbox or protected message for this exercise.</p>
+        <ol>
+          <li>Open an existing low-risk thread you are permitted to use and find the summary control, if available. Check the summary's decisions, requests, and dates against the messages. Do not display private mail during a shared exercise.</li>
+          <li>For safe drafting practice, open a new draft <strong>with the To field empty</strong>. Use the fictional prompt below with Draft with Copilot or your available drafting control.</li>
+          <li>Review the suggested text. Where available, use coaching or a rewrite request for tone and clarity. Keep it as a draft; this exercise does not require sending.</li>
+          <li>For real email, check recipients, attachments, factual commitments, and dates yourself before deciding to send.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; leave it unsent</strong><button class="enhanced" type="button" data-copy="prompt-outlook">Copy prompt</button></div>
+          <pre id="prompt-outlook">Draft a concise, friendly email to a fictional colleague, Priya.
+Thank her for planning to draft the welcome-session handout by 8 October.
+Ask whether she needs any information from the organizer.
+The session format is still undecided and no room is booked.
+Do not say the handout is complete, invent a year, promise approval, or add a meeting link.
+Keep this as a draft for my review.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>The email asks one clear question and does not turn a planned handout into a completed one. The To field is still empty and no message has been sent.</p></div>
+        <p><strong>If you cannot summarize a thread:</strong> practice with this fictional excerpt in work Chat: "Alex: Could you draft the handout? Priya: I plan to finish a draft by 8 October. Alex: Thanks; format and room are still undecided." Ask for agreed actions and unknowns. Do not paste real mail elsewhere just to get around a protection restriction.</p>
+        <p><strong>Go deeper:</strong> <a href="index.html#section-7">prioritization</a> and the original <a href="index.html#section-10">triage assistant</a> are later, feature-dependent exercises, not prerequisites for drafting an email.</p>
+        <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/training/modules/from-inbox-impact-improve-your-email-workflows-ai/2-draft-engaging-emails">Draft, summarize, and coach</a><a href="https://support.microsoft.com/en-us/outlook/frequently-asked-questions-about-copilot-in-outlook">Outlook eligibility and limitations</a></p>
+      </article>
+
+      <article class="lesson" id="teams" data-core="true" aria-labelledby="title-teams">
+        <p class="eyebrow">10 &middot; Everyday apps &middot; 7 minutes</p>
+        <h2 id="title-teams" tabindex="-1">Teams: find decisions, not just discussion.</h2>
+        <p><strong>You will learn:</strong> to catch up on a chat or meeting and separate decisions from suggestions. <strong>Open:</strong> Teams and a conversation you have permission to use.</p>
+        <ol>
+          <li>In a permitted chat, open its Copilot experience where available. Ask what was decided and what still needs an answer. Inspect any selected time range.</li>
+          <li>For a meeting, check organizer settings and organizational transcription policy before the meeting. Do not turn on transcription or recording for an exercise without the appropriate agreement and policy compliance.</li>
+          <li>Use the prompt below against an available meeting recap/transcript or chat. Compare action owners and dates with the actual source.</li>
+          <li>Confirm proposed actions with the people involved before assigning tasks or sharing a recap. A generated table does not assign work.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; catch up</strong><button class="enhanced" type="button" data-copy="prompt-teams">Copy prompt</button></div>
+          <pre id="prompt-teams">Summarize this conversation in three sections: decisions, proposed actions, and open questions.
+For each action, list the owner and due date only if explicitly stated; otherwise write "not specified".
+Point to the supporting message or transcript passage where available.
+Do not treat suggestions as agreements or assign new work.</pre>
+        </div>
+        <div class="callout"><strong>For a useful post-meeting recap, plan for a transcript.</strong> Some live meeting experiences can work without transcription, but dependable post-meeting questions about spoken content require an available transcript. Follow the organizer's settings and your organization's recording, transcription, and retention rules.</div>
+        <div class="check"><h3>Check the result</h3><p>If someone said "Maybe Alex could book a room," that is a suggestion, not an assigned action. If no deadline was given, the summary should not invent one.</p></div>
+        <p><strong>No practice meeting handy?</strong> Use work Chat with this fictional excerpt: "Alex: We agreed to keep the session to 30 minutes. Priya: I will draft the handout by 8 October. Sam: Maybe Alex could book a room. Alex: We have not chosen online or in-person yet." Ask the same question. Only Priya has an explicit commitment and due date in these notes.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/teams/meetings-events/welcome-to-copilot-in-microsoft-teams">Teams chat and meetings</a><a href="https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams">Meeting recap and transcription</a></p>
+      </article>
+
+      <article class="lesson" id="onenote" data-core="true" aria-labelledby="title-onenote">
+        <p class="eyebrow">11 &middot; Everyday apps &middot; 5 minutes</p>
+        <h2 id="title-onenote" tabindex="-1">OneNote: organize the rough notes.</h2>
+        <p><strong>You will learn:</strong> to summarize notes and extract a proposed task list. <strong>Open:</strong> OneNote. Start with one practice page so you can see exactly what Copilot is summarizing.</p>
+        <ol>
+          <li>Create a practice page and paste the fictional notes from guide 02. Give the page a descriptive title.</li>
+          <li>Open Copilot on that page. Ask for a topic-based summary with the prompt below.</li>
+          <li>Read the answer alongside the original. Copy useful content into the page or keep the proposed edit only after reviewing it.</li>
+          <li>Ask for a short checklist of unanswered questions. Leave it as notes, not a claim that tasks or reminders were created.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; organize</strong><button class="enhanced" type="button" data-copy="prompt-onenote">Copy prompt</button></div>
+          <pre id="prompt-onenote">Using only this page, organize the notes under Facts, Explicit commitments, and Questions to resolve.
+For commitments, include an owner and due date only when the notes specify them.
+Then suggest a short preparation checklist, clearly labeled as proposed.
+Do not add new facts or imply tasks have been assigned or scheduled.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>Priya's draft is the explicit commitment. Alex is the coordinator; that alone does not assign every proposed task to Alex. Room and format remain open.</p></div>
+        <p><strong>Check the scope:</strong> do not assume a current-page summary has read every section or notebook. Name the page or selected content you want to work with and compare the result against it.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/onenote/welcome-to-copilot-in-onenote">Copilot in OneNote</a><a href="https://support.microsoft.com/en-us/onenote/copilot-pages/summarize-your-onenote-notes-with-microsoft-365-copilot">Summarize your notes</a></p>
+      </article>
+
+      <article class="lesson" id="pages" data-core="true" aria-labelledby="title-pages">
+        <p class="eyebrow">12 &middot; Everyday apps &middot; 5 minutes</p>
+        <h2 id="title-pages" tabindex="-1">Pages: turn an answer into something you keep.</h2>
+        <p><strong>You will learn:</strong> how a chat answer becomes an editable working page, and how Pages differs from Loop. <strong>Open:</strong> Copilot Chat and a useful response from an earlier guide.</p>
+        <ol>
+          <li>Return to the useful draft from guide 02 or 03. Where available, choose the response's create/edit-in-Page control.</li>
+          <li>Name the page <strong>Welcome session working plan</strong>. Edit a heading or sentence directly.</li>
+          <li>Use the follow-up below if a Copilot refinement control is available, then check the changes.</li>
+          <li>Reopen the page from your Pages list to see the saved artifact. For this exercise, stop before sharing; later, review permissions and recipients deliberately.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; refine your page</strong><button class="enhanced" type="button" data-copy="prompt-pages">Copy prompt</button></div>
+          <pre id="prompt-pages">Organize this working plan into Confirmed inputs, Proposed next steps, and Open decisions.
+Keep the source's uncertainty intact. Add a short "Needs organizer review" section for any unresolved approval or scheduling details.
+Do not mark proposals as approved.</pre>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>Copilot Pages</h3><p>An editable canvas to keep and improve Copilot output instead of leaving it only in a chat response.</p></div>
+          <div class="card"><h3>Microsoft Loop</h3><p>A broader collaboration experience with workspaces, pages, and components that can stay in sync across supported places. Related, but not another name for Copilot Chat.</p></div>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>You can reopen the named page and see your edit. A persistent page is useful, but it still needs a factual review and intentional sharing permissions.</p></div>
+        <p><strong>Check the artifact:</strong> reopen the Page rather than assuming it exists because Copilot said it drafted one. A saved Page, a Word document, and a chat response are different places to keep your work.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-microsoft-365-copilot-pages">Get started with Pages</a><a href="https://support.microsoft.com/en-us/microsoft-365-copilot/compare-microsoft-loop-copilot-pages-and-copilot-notebooks">Pages, Loop, and Notebooks compared</a></p>
+      </article>
+
+      <article class="lesson" id="create" data-core="false" aria-labelledby="title-create">
+        <p class="eyebrow">13 &middot; Optional exploration &middot; 5 minutes</p>
+        <h2 id="title-create" tabindex="-1">Create: describe the visual you need.</h2>
+        <p><strong>You will learn:</strong> to specify an image and refine it. <strong>Open:</strong> Create or image generation in your work Copilot Chat.</p>
+        <ol>
+          <li>Open Create in the Microsoft 365 Copilot app, or use image generation in Chat. Choose an image task.</li>
+          <li>Use the prompt below. Notice how it states the subject, purpose, style, and composition.</li>
+          <li>Refine one property: "Use fewer objects and leave more empty space on the left." Compare the new version.</li>
+          <li>Review the result before downloading or placing it in a practice slide. Do not publish as part of this exercise.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; image brief</strong><button class="enhanced" type="button" data-copy="prompt-image">Copy prompt</button></div>
+          <pre id="prompt-image">Create a simple illustration for a fictional employee welcome session.
+Show a welcoming workspace with a few abstract people collaborating.
+Use a clean, flat illustration style and a calm, warm palette.
+Use a wide composition with empty space on the left for a title I will add myself.
+Do not include text, company logos, real people, or branded products.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>There is room for a readable title, no accidental lettering or logos, and no misleading depiction of a real event. Inspect visual errors and consider accessibility, rights, and your organization's branding rules before reuse.</p></div>
+        <p><strong>Keep the purpose in mind:</strong> an approved existing image or a simple shape layout may communicate the idea better than a generated image. Choose the clearest visual, not just the newest one.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-create-in-the-microsoft-365-copilot-app">Explore Create</a><a href="https://support.microsoft.com/en-us/microsoft-365-copilot/create-ai-generated-images-with-the-microsoft-365-copilot-app">Create an image</a></p>
+      </article>
+
+      <article class="lesson" id="agents" data-core="false" aria-labelledby="title-agents">
+        <p class="eyebrow">14 &middot; Optional exploration &middot; 5 minutes</p>
+        <h2 id="title-agents" tabindex="-1">Agents: a helper with a narrower job.</h2>
+        <p><strong>You will learn:</strong> when a specialized agent may help. You do not need to build one, use Copilot Studio, or configure automation to finish this path.</p>
+        <p>An agent is a specialized assistant with instructions, knowledge, and sometimes tools for a particular task. Some answer questions; others can take actions. Its stated purpose is not a guarantee of correctness or permission to do anything it proposes.</p>
+        <ol>
+          <li>Open the available agents list in your approved Copilot experience. Read an organization-approved agent's description and any permissions or data-access information.</li>
+          <li>Choose an agent already made available to you. If an unexpected consent, installation, or new connection request appears, stop and follow your organization's process.</li>
+          <li>Try one suggested prompt with fictional or approved content. Check sources and outputs just as you would in regular Chat.</li>
+          <li>Do not authorize sending, sharing, or system changes merely to complete a learning exercise. An action-taking agent needs additional care.</li>
+        </ol>
+        <div class="grid">
+          <div class="card"><h3>Researcher</h3><p>A longer, multistep research task with a defined question and sources. Read the report and open its citations. It is not the best starting point for a one-sentence rewrite.</p></div>
+          <div class="card"><h3>Analyst</h3><p>Deeper analysis of supplied data, such as a spreadsheet. Ask for the method and check sample calculations. It is distinct from Copilot inside Excel.</p></div>
+        </div>
+        <div class="prompt"><div class="prompt-head"><strong>Try this with Researcher</strong><button class="enhanced" type="button" data-copy="prompt-agent">Copy prompt</button></div>
+          <pre id="prompt-agent">Using public Microsoft sources only, research good practices for writing beginner Copilot prompts.
+Give me a short comparison of three practices, links to the supporting sources, and any limitations.
+Separate sourced guidance from your own suggestions. Do not access internal work content for this task.</pre>
+        </div>
+        <div class="check"><h3>Check your understanding</h3><p>You can explain the agent's job, which information it can use, and whether it can act. A specialized assistant still needs clear instructions and human review.</p></div>
+        <p><strong>Keep it simple:</strong> start with an agent your organization already makes available. You do not need to install a third-party agent or connect a new system to practice these skills.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-agents-in-the-microsoft-365-copilot-app">Get started with agents</a><a href="https://learn.microsoft.com/en-us/copilot/agents">Agent overview</a><a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-researcher-in-microsoft-365-copilot">Researcher</a><a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-analyst-in-microsoft-365-copilot">Analyst</a></p>
+      </article>
+
+      <article class="lesson" id="notebooks" data-core="false" aria-labelledby="title-notebooks">
+        <p class="eyebrow">15 &middot; Optional exploration &middot; 5 minutes</p>
+        <h2 id="title-notebooks" tabindex="-1">Notebooks: keep related sources together.</h2>
+        <p><strong>You will learn:</strong> to work with a bounded collection of references instead of reconstructing context in every chat. This is <strong>Copilot Notebooks</strong>, not the same thing as a notebook in OneNote.</p>
+        <ol>
+          <li>Create a Copilot Notebook for a single fictional topic, such as <strong>Welcome session planning</strong>.</li>
+          <li>Add your Word practice brief and, where supported, your working Page or another permitted reference about the same topic. Confirm each reference is available to the notebook.</li>
+          <li>Ask the comparison question below. Ask for source support and inspect differences rather than assuming one document is more current.</li>
+          <li>Update an actual source when a decision changes, then check how the notebook reflects it. Keep this practice notebook unshared.</li>
+        </ol>
+        <div class="prompt"><div class="prompt-head"><strong>Try this &middot; compare sources</strong><button class="enhanced" type="button" data-copy="prompt-notebook">Copy prompt</button></div>
+          <pre id="prompt-notebook">Using the references in this notebook, list the agreed facts about the welcome session.
+Identify conflicting details and unanswered questions, citing the supporting reference where possible.
+Do not pick a winner between conflicting sources unless the sources establish which is authoritative.
+If a reference is inaccessible, identify that limitation.</pre>
+        </div>
+        <div class="check"><h3>Check the result</h3><p>The answer stays tied to your references and flags uncertainty. If both references contain the same information, "no conflict found" can be correct; you do not need to manufacture a disagreement.</p></div>
+        <p><strong>Keep the source set focused:</strong> use a few relevant references and check that each was included successfully. More files do not automatically produce a better answer. A notebook cannot use a source you do not have permission to read.</p>
+        <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-microsoft-365-copilot-notebooks">Start with Notebooks</a><a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-answers-and-insights-about-your-microsoft-365-copilot-notebook">References, grounding, and limits</a></p>
+      </article>
+
+      <article class="lesson" id="finish" data-core="true" aria-labelledby="title-finish">
+        <p class="eyebrow">16 &middot; Bring it together &middot; 10 minutes</p>
+        <h2 id="title-finish" tabindex="-1">Turn one set of notes into useful work.</h2>
+        <p><strong>Your challenge:</strong> use the fictional welcome-session notes to produce a Word brief, a short PowerPoint presentation, and an unsent Outlook email. Use work Chat to plan and refine, then work inside each app to create the actual artifact.</p>
+        <ol>
+          <li><strong>Brief:</strong> supply the notes from guide 02 and write your own prompt with a goal, audience, source, and output expectations. Ask for facts, proposed actions, and open decisions.</li>
+          <li><strong>Improve:</strong> make one follow-up request that changes tone or length without changing facts. Check what changed.</li>
+          <li><strong>Repurpose:</strong> ask for a four-slide outline from the reviewed brief. Create it in PowerPoint if your experience allows, or build it manually.</li>
+          <li><strong>Communicate:</strong> draft an email asking for the unresolved decisions. Leave recipients empty and do not send it.</li>
+          <li><strong>Verify:</strong> use the checklist below, then choose one low-risk real task to try later using your organization's data-handling rules.</li>
+        </ol>
+        <div class="check"><h3>Done means you can show this</h3><ul>
+          <li>The source is explicit, the audience is clear, and the output has the format you asked for.</li>
+          <li>No invented year, venue, meeting link, spending approval, or completed handout appears.</li>
+          <li>Proposed actions remain separate from commitments. The 600 USD figure remains a budget limit.</li>
+          <li>You corrected at least one issue or can explain why no correction was needed.</li>
+          <li>You know which parts Copilot generated and which parts you personally checked. Nothing was sent or shared by this exercise.</li>
+        </ul></div>
+        <h3>Three quick self-checks</h3>
+        <details><summary>1. Does a linked citation guarantee a claim is correct?</summary><p>No. Open the original source and check that it supports the actual claim, with the right date and context.</p></details>
+        <details><summary>2. Does getting an answer in Chat mean Copilot edited my workbook?</summary><p>No. Generated advice is different from an applied edit. Inspect the workbook and the active app mode.</p></details>
+        <details><summary>3. Does a work-data search read every file in my organization?</summary><p>No. Copilot works with information you have permission to access and the context available to that experience. Select the relevant source and verify that it was actually used.</p></details>
+        <p><strong>Your reusable habit:</strong> brief it, ground it, refine it, check it. Once that feels natural, move to the <a href="index.html">original PowerPoint &amp; Outlook lab</a> for the eight deeper scenarios.</p>
+        <p class="sources">Keep learning: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Microsoft prompting guidance</a><a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Work-data protections</a></p>
+      </article>
+
+      <div class="controls enhanced" aria-label="Guide controls">
+        <button id="previous" type="button">Previous guide</button>
+        <span id="position" class="muted" role="status"></span>
+        <button id="next" class="primary" type="button">Next guide</button>
+      </div>
+
+      <section class="help" id="help" aria-labelledby="help-title">
+        <p class="eyebrow">Keep nearby</p>
+        <h2 id="help-title">When something does not work</h2>
+        <div class="grid">
+          <div class="card"><h3>I cannot find the control</h3><p>Confirm your work account and check whether you are using the web or desktop app. Labels and layouts differ. Try the current app version or ask your support team for the right entry point.</p></div>
+          <div class="card"><h3>It cannot read my file</h3><p>Check permissions, file type, protection, source selection, and attachment/reference support. A filename in the prompt is not the file itself. Never strip a label or bypass an access restriction.</p></div>
+          <div class="card"><h3>The answer is vague or wrong</h3><p>Narrow the goal, identify the source and audience, specify the format, and correct a specific error. Verify again; a confident rewrite can still be wrong.</p></div>
+          <div class="card"><h3>It changed more than expected</h3><p>Pause. Inspect the active editing mode and use Undo or the app's version history as appropriate. Practice on a copy. A sentence saying "ask first" is not a substitute for checking the mode and available controls.</p></div>
+        </div>
+        <h3>Plain-language glossary</h3>
+        <dl>
+          <dt>Prompt</dt><dd>The instruction or question you send to Copilot.</dd>
+          <dt>Context</dt><dd>Background that helps explain the task, audience, or situation.</dd>
+          <dt>Grounding</dt><dd>Using supplied or retrieved sources to inform an answer.</dd>
+          <dt>Citation</dt><dd>A pointer to a source. A place to check, not a guarantee.</dd>
+          <dt>Hallucination</dt><dd>A generated statement that looks plausible but is unsupported or incorrect.</dd>
+          <dt>Tenant</dt><dd>Your organization's Microsoft 365 environment, with its own settings and policies.</dd>
+          <dt>Agent</dt><dd>A specialized assistant with defined instructions, knowledge, and sometimes action-taking tools.</dd>
+          <dt>Human review</dt><dd>Your check of accuracy, appropriateness, permissions, and consequences before relying on or acting on output.</dd>
+        </dl>
+        <p><strong>Practice files:</strong> <a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar research summary</a> &middot; <a href="index.html#section-2">original lab files</a>. The downloadable <strong>Copilot Prompt Guide</strong> on the original lab covers its eight scenarios, not this beginner path. Use <strong>Print all guides</strong> here for a take-home copy of these new lessons.</p>
+        <p class="sources">Public Microsoft sources reviewed for this edition: <strong>22 September 2026</strong>. Source links appear within every guide. Labels and entry points change; follow the linked guidance for your current client. This learning path covers everyday foundations, not every preview, admin setting, or specialist app.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="muted">Customer-neutral learning material. All practice people, plans, and figures on this page are fictional. This static guide does not connect to your Microsoft 365 data, submit prompts, or perform actions in your apps. Check-offs are not certification.</footer>
+  <script>
+    const lessons = [...document.querySelectorAll(".lesson")];
+    const links = [...document.querySelectorAll(".lesson-nav a")];
+    const previous = document.getElementById("previous");
+    const next = document.getElementById("next");
+    const position = document.getElementById("position");
+    const viewAll = document.getElementById("view-all");
+    const status = document.getElementById("copy-status");
+    let current = 0;
+    let showAll = false;
+    let closedBeforePrint = [];
+
+    function render() {
+      lessons.forEach((lesson, index) => { lesson.hidden = !showAll && index !== current; });
+      links.forEach((link, index) => {
+        if (index === current) link.setAttribute("aria-current", "step");
+        else link.removeAttribute("aria-current");
+      });
+      previous.disabled = current === 0;
+      next.disabled = current === lessons.length - 1;
+      position.textContent = `Guide ${current + 1} of ${lessons.length}`;
+      viewAll.setAttribute("aria-pressed", String(showAll));
+      viewAll.textContent = showAll ? "Show one guide" : "Show all guides";
+    }
+
+    function followHash(focus = false) {
+      const id = location.hash.slice(1);
+      const index = lessons.findIndex(lesson => lesson.id === id);
+      if (index < 0) return;
+      current = index;
+      render();
+      if (focus) lessons[current].querySelector("h2").focus({ preventScroll: true });
+      lessons[current].scrollIntoView({ block: "start" });
+    }
+
+    function updateProgress() {
+      let core = 0;
+      let optional = 0;
+      lessons.forEach((lesson, index) => {
+        const done = lesson.querySelector(".completion input").checked;
+        links[index].dataset.done = String(done);
+        if (done) {
+          if (lesson.dataset.core === "true") core++;
+          else optional++;
+        }
+      });
+      document.getElementById("progress").value = core;
+      document.getElementById("progress-label").textContent = `${core} of 13 core guides completed`;
+      document.getElementById("optional-progress").textContent = `${optional} of 3 optional guides completed`;
+    }
+
+    lessons.forEach(lesson => {
+      const label = document.createElement("label");
+      label.className = "completion enhanced";
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.autocomplete = "off";
+      input.addEventListener("change", updateProgress);
+      label.append(input, document.createTextNode("I practiced this and checked the result."));
+      lesson.append(label);
+    });
+
+    previous.addEventListener("click", () => {
+      if (current > 0) location.hash = lessons[current - 1].id;
+    });
+    next.addEventListener("click", () => {
+      if (current < lessons.length - 1) location.hash = lessons[current + 1].id;
+    });
+    viewAll.addEventListener("click", () => { showAll = !showAll; render(); });
+    document.getElementById("print").addEventListener("click", () => window.print());
+    window.addEventListener("beforeprint", () => {
+      closedBeforePrint = [...document.querySelectorAll("details:not([open])")];
+      closedBeforePrint.forEach(details => { details.open = true; });
+    });
+    window.addEventListener("afterprint", () => {
+      closedBeforePrint.forEach(details => { details.open = false; });
+      closedBeforePrint = [];
+    });
+    window.addEventListener("hashchange", () => followHash(true));
+    links.forEach(link => link.addEventListener("click", () => {
+      if (link.hash === location.hash) followHash(true);
+    }));
+    document.querySelectorAll("[data-copy]").forEach(button => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copy);
+        try {
+          await navigator.clipboard.writeText(target.textContent.trim());
+          status.textContent = "Copied. Paste into your approved Copilot experience; nothing was sent from this page.";
+          button.textContent = "Copied";
+        } catch (error) {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          status.textContent = "Clipboard access is unavailable. The text is selected; use your device's Copy command.";
+          button.textContent = "Select and copy";
+        }
+      });
+    });
+
+    document.documentElement.classList.add("js");
+    render();
+    followHash();
+    updateProgress();
+  </script>
+</body>
+</html>
