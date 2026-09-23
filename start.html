@@ -160,8 +160,8 @@
 <body>
   <a class="skip" href="#learning">Skip to the learning path</a>
   <header class="topbar">
-    <a class="brand" href="index.html">Copilot in Action<span>Practical skills. Your judgment stays in charge.</span></a>
-    <nav aria-label="Site"><a href="#learning">Beginner path</a><a href="index.html">PowerPoint &amp; Outlook lab</a><a href="#help">Help &amp; glossary</a></nav>
+    <a class="brand" href="#learning">Copilot in Action<span>Practical skills. Your judgment stays in charge.</span></a>
+    <nav aria-label="Site"><a href="#learning">Learning path</a><a href="#practice-kit">Practice kit</a><a href="#help">Help &amp; glossary</a></nav>
   </header>
   <div class="shell">
     <aside aria-label="Learning path navigation">
@@ -199,10 +199,11 @@
     <main id="learning">
       <section class="intro" aria-labelledby="course-title">
         <p class="eyebrow">Microsoft 365 Copilot &middot; Start here</p>
-        <h1>From first question to everyday confidence.</h1>
+        <h1 id="course-title">From first question to everyday confidence.</h1>
         <p class="lede">No AI knowledge required. Learn to ask, supply context, check an answer, and use Copilot in the tools you already work in. Every exercise uses fictional data and ends with something you can check yourself.</p>
         <div class="meta"><span class="badge">13 core guides</span><span class="badge">3 optional explorations</span><span class="badge">About 90 minutes for the core path</span></div>
         <p>Take it in three sittings: foundations, app practice, and the final challenge. Times are estimates, not a speed test. Mark a guide complete after you have practiced the workflow and checked its result.</p>
+        <p>Everything you need to follow this path is here: instructions, copyable prompts, fictional source notes, practice data, and answer checks. Use the <a href="#practice-kit">practice kit</a> to prepare your materials and <strong>Print all guides</strong> for a take-home copy.</p>
         <div class="callout"><strong>Before you start:</strong> This path is for people with a Microsoft 365 Copilot license. Sign in with your work account and keep these guides open in a second tab. We will focus on using Copilot, not choosing a plan. Button names and layouts may differ between web and desktop apps.</div>
         <p class="muted">This is a guide, not a connected Copilot app. Copy prompts into your organization's approved Copilot experience. No sign-in, customer content, or API key is needed on this site.</p>
         <div class="toolbar"><a class="button primary" href="#start">Start with the basics</a><button class="enhanced" id="view-all" type="button" aria-pressed="false">Show all guides</button><button class="enhanced" id="print" type="button">Print all guides</button></div>
@@ -304,19 +305,20 @@ Separate any new assumptions from the agenda.</pre>
         </div>
         <h3>Do this</h3>
         <ol>
-          <li>Download the <a href="assets/Northstar_Consumer_Research_Summary.docx" download>fictional Northstar research summary</a>. This is the same practice document used in the original lab.</li>
+          <li>Copy the <a href="#practice-kit">fictional source notes in the practice kit</a> into a blank Word document. Save it as <strong>Welcome session source notes.docx</strong>. Keep the notes unchanged so you have a clear source to check.</li>
           <li>In a new work chat, use the available attachment or content-reference control to select that document. If your experience references cloud files, save the practice copy to your work OneDrive or SharePoint first. Confirm the correct file is shown.</li>
           <li>Send the prompt below. Open the original document beside the response, not only the generated citations.</li>
           <li>For a separate public-web exercise, start a new chat and ask: "Find Microsoft's current guidance on writing Copilot prompts. Link the official source and separate its advice from your suggestions." If web access is unavailable, read the official source linked below instead.</li>
         </ol>
         <div class="prompt"><div class="prompt-head"><strong>Try this &middot; summarize a file</strong><button class="enhanced" type="button" data-copy="prompt-source">Copy prompt</button></div>
-          <pre id="prompt-source">Use only the attached Project Northstar Consumer Research Summary.
-List its four headline findings, followed by only the open questions explicitly listed in the document.
-Point me to the supporting section or text for each finding.
+          <pre id="prompt-source">Use only the attached Welcome session source notes.
+Summarize the planned session's duration, audience, responsibilities, and budget.
+Then list the unresolved details explicitly identified in the notes.
+Point me to the supporting text for each statement.
 Do not add outside research or turn assumptions into facts.
 If you cannot access the file, tell me instead of guessing.</pre>
         </div>
-        <div class="check"><h3>Check the result</h3><p>The document has four headline findings and three open questions. Check the actual wording, not just the count. A citation can be incomplete or point to material that does not support the claim.</p></div>
+        <div class="check"><h3>Check the result</h3><p>The source says 30 minutes, 12 new colleagues, Alex coordinating, and Priya drafting the handout by 8 October. The 600 USD amount is a budget limit. The year, spending approval, room, and delivery format are unresolved. A citation can be incomplete or point to material that does not support the claim.</p></div>
         <p><strong>If attachment is unavailable:</strong> paste a small permitted excerpt, say "use only the excerpt below," and narrow the task to that excerpt. Do not imply Copilot saw the whole file. Never remove protection or move real work content to a personal service to make an exercise work.</p>
         <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-content-to-microsoft-365-copilot-chat-prompts">Add content to Chat</a><a href="https://learn.microsoft.com/en-us/copilot/overview">Work and web grounding</a><a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Prompting guidance</a></p>
       </article>
@@ -403,7 +405,7 @@ Ask before making changes if your current mode supports that.</pre>
       <article class="lesson" id="powerpoint" data-core="true" aria-labelledby="title-powerpoint">
         <p class="eyebrow">08 &middot; Everyday apps &middot; 7 minutes</p>
         <h2 id="title-powerpoint" tabindex="-1">PowerPoint: turn a source into a story.</h2>
-        <p><strong>You will learn:</strong> to create a first draft and check its content before polishing. <strong>Open:</strong> PowerPoint and the brief from Word. The <a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar practice document</a> is also available for a separate research-based exercise.</p>
+        <p><strong>You will learn:</strong> to create a first draft and check its content before polishing. <strong>Open:</strong> PowerPoint and your <strong>Welcome session brief</strong> from the <a href="#word">Word guide</a>. If you started here, complete that short drafting exercise first; its prompt includes all the source notes.</p>
         <ol>
           <li>Open PowerPoint and find Copilot's presentation-creation controls. Save the approved practice source to your work OneDrive or SharePoint if required by your experience.</li>
           <li>Where file-based creation is available, select your <strong>Welcome session brief</strong> as the source and use the prompt below. Confirm it is actually attached or referenced.</li>
@@ -419,7 +421,7 @@ Do not invent a meeting link, booked venue, budget approval, or missing dates.</
         </div>
         <div class="check"><h3>Check the result</h3><p>The draft has the requested four-topic structure and distinguishes facts from proposals. Images are illustrative, not evidence. Check notes as well as visible slide text for invented details.</p></div>
         <p><strong>If file referencing or creation is unavailable:</strong> paste the fictional brief into work Chat and ask for a four-slide outline, then build the slides yourself. File-reference support differs between creation experiences, including newer editing/agent modes; a missing control is not proof the file is wrong.</p>
-        <p><strong>Go deeper:</strong> the original lab covers <a href="index.html#section-3">grounded creation</a>, <a href="index.html#section-4">templates</a>, and feature-dependent <a href="index.html#section-5">Brand Kits</a> and <a href="index.html#section-6">Skills</a>.</p>
+        <p><strong>Practice one refinement:</strong> ask, "Shorten each slide title to six words or fewer without changing the meaning." Check the titles yourself, then review the slide layout and contrast. Keep the source facts unchanged.</p>
         <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/powerpoint/copilot/create-a-new-presentation-with-copilot-in-powerpoint">Create a presentation and review it</a></p>
       </article>
 
@@ -443,7 +445,7 @@ Keep this as a draft for my review.</pre>
         </div>
         <div class="check"><h3>Check the result</h3><p>The email asks one clear question and does not turn a planned handout into a completed one. The To field is still empty and no message has been sent.</p></div>
         <p><strong>If you cannot summarize a thread:</strong> practice with this fictional excerpt in work Chat: "Alex: Could you draft the handout? Priya: I plan to finish a draft by 8 October. Alex: Thanks; format and room are still undecided." Ask for agreed actions and unknowns. Do not paste real mail elsewhere just to get around a protection restriction.</p>
-        <p><strong>Go deeper:</strong> <a href="index.html#section-7">prioritization</a> and the original <a href="index.html#section-10">triage assistant</a> are later, feature-dependent exercises, not prerequisites for drafting an email.</p>
+        <p><strong>Practice one refinement:</strong> ask, "Shorten this draft to under 100 words while keeping the question and all unresolved details." Check the result and keep it unsent.</p>
         <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/training/modules/from-inbox-impact-improve-your-email-workflows-ai/2-draft-engaging-emails">Draft, summarize, and coach</a><a href="https://support.microsoft.com/en-us/outlook/frequently-asked-questions-about-copilot-in-outlook">Outlook eligibility and limitations</a></p>
       </article>
 
@@ -474,7 +476,7 @@ Do not treat suggestions as agreements or assign new work.</pre>
         <h2 id="title-onenote" tabindex="-1">OneNote: organize the rough notes.</h2>
         <p><strong>You will learn:</strong> to summarize notes and extract a proposed task list. <strong>Open:</strong> OneNote. Start with one practice page so you can see exactly what Copilot is summarizing.</p>
         <ol>
-          <li>Create a practice page and paste the fictional notes from guide 02. Give the page a descriptive title.</li>
+          <li>Create a practice page and paste the <a href="#practice-kit">fictional source notes from the practice kit</a>. Give the page a descriptive title.</li>
           <li>Open Copilot on that page. Ask for a topic-based summary with the prompt below.</li>
           <li>Read the answer alongside the original. Copy useful content into the page or keep the proposed edit only after reviewing it.</li>
           <li>Ask for a short checklist of unanswered questions. Leave it as notes, not a claim that tasks or reminders were created.</li>
@@ -587,7 +589,7 @@ If a reference is inaccessible, identify that limitation.</pre>
         <h2 id="title-finish" tabindex="-1">Turn one set of notes into useful work.</h2>
         <p><strong>Your challenge:</strong> use the fictional welcome-session notes to produce a Word brief, a short PowerPoint presentation, and an unsent Outlook email. Use work Chat to plan and refine, then work inside each app to create the actual artifact.</p>
         <ol>
-          <li><strong>Brief:</strong> supply the notes from guide 02 and write your own prompt with a goal, audience, source, and output expectations. Ask for facts, proposed actions, and open decisions.</li>
+          <li><strong>Brief:</strong> supply the <a href="#practice-kit">fictional source notes</a> and write your own prompt with a goal, audience, source, and output expectations. Ask for facts, proposed actions, and open decisions.</li>
           <li><strong>Improve:</strong> make one follow-up request that changes tone or length without changing facts. Check what changed.</li>
           <li><strong>Repurpose:</strong> ask for a four-slide outline from the reviewed brief. Create it in PowerPoint if your experience allows, or build it manually.</li>
           <li><strong>Communicate:</strong> draft an email asking for the unresolved decisions. Leave recipients empty and do not send it.</li>
@@ -604,7 +606,7 @@ If a reference is inaccessible, identify that limitation.</pre>
         <details><summary>1. Does a linked citation guarantee a claim is correct?</summary><p>No. Open the original source and check that it supports the actual claim, with the right date and context.</p></details>
         <details><summary>2. Does getting an answer in Chat mean Copilot edited my workbook?</summary><p>No. Generated advice is different from an applied edit. Inspect the workbook and the active app mode.</p></details>
         <details><summary>3. Does a work-data search read every file in my organization?</summary><p>No. Copilot works with information you have permission to access and the context available to that experience. Select the relevant source and verify that it was actually used.</p></details>
-        <p><strong>Your reusable habit:</strong> brief it, ground it, refine it, check it. Once that feels natural, move to the <a href="index.html">original PowerPoint &amp; Outlook lab</a> for the eight deeper scenarios.</p>
+        <p><strong>Your reusable habit:</strong> brief it, ground it, refine it, check it. Repeat this workflow with one low-risk task from your own work. Keep the useful prompt, record what you had to correct, and improve it the next time.</p>
         <p class="sources">Keep learning: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Microsoft prompting guidance</a><a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Work-data protections</a></p>
       </article>
 
@@ -613,6 +615,29 @@ If a reference is inaccessible, identify that limitation.</pre>
         <span id="position" class="muted" role="status"></span>
         <button id="next" class="primary" type="button">Next guide</button>
       </div>
+
+      <section class="help" id="practice-kit" aria-labelledby="practice-kit-title">
+        <p class="eyebrow">Everything you need, in one place</p>
+        <h2 id="practice-kit-title">Your practice kit</h2>
+        <p>All people, dates, and figures below are fictional. No separate course, template pack, or download is required. You will create your own practice documents as you go.</p>
+        <h3>Source notes</h3>
+        <p>Copy these notes into Word and save as <strong>Welcome session source notes.docx</strong> for the <a href="#grounding">source-grounding exercise</a>. You can also paste them into OneNote or use them for the final challenge. These are the source facts, not an AI-generated brief.</p>
+        <div class="prompt"><div class="prompt-head"><strong>Fictional welcome-session source notes</strong><button class="enhanced" type="button" data-copy="practice-notes">Copy notes</button></div>
+          <pre id="practice-notes">Welcome session source notes
+
+- A 30-minute welcome session is planned for 12 new colleagues on 14 October; the year is not specified.
+- Alex coordinates the session.
+- Priya will draft the handout by 8 October.
+- The budget limit is 600 USD; approved spending is not specified.
+- No room is booked.
+- Online versus in-person delivery is still undecided.</pre>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>Spreadsheet practice</h3><p>The <a href="#excel">Excel guide</a> contains the copyable four-row budget table, setup steps, formula example, and numerical answer key. It is a separate fictional calculation exercise, not an update to the source notes above.</p></div>
+          <div class="card"><h3>Documents you build</h3><p>Create your brief in <a href="#word">Word</a>, use that reviewed brief in <a href="#powerpoint">PowerPoint</a>, and keep your <a href="#outlook">Outlook email</a> unsent. Each guide supplies its own instructions and checks.</p></div>
+        </div>
+        <p><strong>Take it with you:</strong> use <strong>Print all guides</strong> at the top of this page, then choose your browser's PDF destination or a printer. The output includes all 16 guides, prompts, source notes, practice data, and self-check answers. No separate prompt guide is needed.</p>
+      </section>
 
       <section class="help" id="help" aria-labelledby="help-title">
         <p class="eyebrow">Keep nearby</p>
@@ -634,7 +659,7 @@ If a reference is inaccessible, identify that limitation.</pre>
           <dt>Agent</dt><dd>A specialized assistant with defined instructions, knowledge, and sometimes action-taking tools.</dd>
           <dt>Human review</dt><dd>Your check of accuracy, appropriateness, permissions, and consequences before relying on or acting on output.</dd>
         </dl>
-        <p><strong>Practice files:</strong> <a href="assets/Northstar_Consumer_Research_Summary.docx" download>Northstar research summary</a> &middot; <a href="index.html#section-2">original lab files</a>. The downloadable <strong>Copilot Prompt Guide</strong> on the original lab covers its eight scenarios, not this beginner path. Use <strong>Print all guides</strong> here for a take-home copy of these new lessons.</p>
+        <p><strong>Need the materials again?</strong> The <a href="#practice-kit">practice kit</a> keeps the fictional source notes, spreadsheet exercise, and document-building steps together on this page.</p>
         <p class="sources">Public Microsoft sources reviewed for this edition: <strong>22 September 2026</strong>. Source links appear within every guide. Labels and entry points change; follow the linked guidance for your current client. This learning path covers everyday foundations, not every preview, admin setting, or specialist app.</p>
       </section>
     </main>

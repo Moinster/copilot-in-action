@@ -2,13 +2,13 @@
 
 A reusable, customer-agnostic Microsoft 365 Copilot learning site: from a first prompt to practical work across Microsoft 365.
 
-The original PowerPoint and Outlook lab still contains its eight scenarios, unchanged prompts, and downloadable files. The beginner path adds 13 core guides and three optional explorations with fictional practice content, numbered steps, checkable outcomes, practice alternatives, and direct public Microsoft sources.
+The standalone beginner path contains 13 core guides and three optional explorations with fictional practice content, numbered steps, checkable outcomes, practice alternatives, and direct public Microsoft sources.
 
-**Live site:** https://moinster.github.io/copilot-in-action/
+**Learning path:** https://moinster.github.io/copilot-in-action/start.html
 
 ## Beginner path
 
-`start.html` is the beginner entry point, linked prominently from the existing lab. It does not renumber or replace the original `index.html#section-N` links.
+`start.html` is a self-contained learning path. It does not link to or require `index.html`, any existing lab, or files in `assets/`. All practice inputs are included on the page; learners create their own source document and working artifacts. Public Microsoft links provide supporting documentation rather than prerequisite course material.
 
 | Guides | Contents |
 |---|---|
@@ -23,9 +23,11 @@ Navigation supports direct lesson hashes, browser back/forward, a show-all readi
 
 Public Microsoft Learn and Support sources are linked within the guides, reviewed for the 22 September 2026 edition. This is everyday foundational coverage, not an exhaustive feature or licensing catalog.
 
-The existing downloadable `Copilot_Prompt_Guide.docx` covers only the original eight scenarios; it is not advertised as containing the beginner lessons. Use the beginner page's Print all guides control for those.
+The on-page practice kit includes copyable welcome-session source notes and links to the included spreadsheet exercise and document-building steps. Print all guides includes all lessons, prompts, practice inputs, and self-check answers; no separate prompt guide is required.
 
-## What's here
+## Retained eight-scenario page
+
+`index.html` and its assets remain unchanged for existing users and bookmarks. They are separate from, and not prerequisites for, the standalone learning path.
 
 | Section | Contents |
 |---|---|
@@ -79,7 +81,7 @@ The site carries no customer name, no delivery-programme branding, and no custom
 
 ```
 index.html                 Original eight-scenario lab and beginner-path entry links
-start.html                 Self-contained beginner guide with inline styles and behaviour
+start.html                 Standalone learning path, inline practice kit, styles and behaviour
 .nojekyll                  Serve files verbatim from GitHub Pages
 assets/                    Attendee files
 ```
