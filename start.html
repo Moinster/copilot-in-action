@@ -227,8 +227,8 @@
           <li>Start a new conversation. Notice the new-chat control, the message history, and any source or file-attachment controls available to you. Labels vary; you do not need every control to start.</li>
           <li>Keep these guides in a second tab. You will copy a prompt from the next lesson into Chat, not type private information into this website.</li>
         </ol>
-        <div class="check"><h3>What good looks like</h3><p>You can open an approved work conversation and explain that Copilot generates a useful draft, not a guaranteed fact or automatic approval.</p></div>
-        <p><strong>Know the boundary:</strong> it can misunderstand, omit details, and confidently invent information. It cannot infer every unstated business rule. A draft task list is not a set of assigned tasks; a draft email is not a sent email.</p>
+        <div class="check"><h3>What good looks like</h3><p>You can open an approved work conversation and use Copilot's response as a starting point to refine and check.</p></div>
+        <p><strong>Make it a conversation:</strong> share the context and business rules that matter, then challenge the response with follow-up questions. This helps you assess accuracy and consider another viewpoint. You remain in charge of the final decisions and actions.</p>
         <p><strong>If you are stuck:</strong> confirm you are signed in with the right work account and ask your organization's support team about the app entry point. There is no separate sign-in to this guide.</p>
         <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-microsoft-365-copilot-chat">Start with Copilot Chat</a><a href="https://learn.microsoft.com/en-us/copilot/overview">Copilot overview</a></p>
       </article>
@@ -241,12 +241,12 @@
         <ol>
           <li>Start a new chat. Copy the complete prompt below, including the fictional notes.</li>
           <li>Paste it into Copilot's message box and send it. Read the whole answer before judging it.</li>
-          <li>Compare its claims with the notes. A useful answer can be short; it does not need to sound impressive.</li>
+          <li>Compare the key details with the notes. A useful answer can be short and straightforward.</li>
         </ol>
         <div class="prompt"><div class="prompt-head"><strong>Try this &middot; summarize</strong><button class="enhanced" type="button" data-copy="prompt-first">Copy prompt</button></div>
           <pre id="prompt-first">Write a short status update for the organizer of this fictional employee welcome session.
 Use only the notes below. Give me three bullets: confirmed facts, next action, and open decisions.
-Do not invent dates, approvals, or completed work.
+Include dates, approvals, and completed work only when the notes explicitly establish them.
 
 Notes:
 - A 30-minute welcome session is planned for 12 new colleagues on 14 October; the year is not specified.
@@ -256,9 +256,9 @@ Notes:
 - No room is booked.
 - Online versus in-person delivery is still undecided.</pre>
         </div>
-        <div class="check"><h3>Check the result</h3><p>The session is <strong>planned</strong>, not fully confirmed. The room is not booked, 600 USD is a limit rather than approved spending, and the format is undecided. The answer must not supply a year, claim Priya finished, or say invitations were sent.</p></div>
+        <div class="check"><h3>Check the result</h3><p>The session is <strong>planned</strong>, the room and format remain open, and 600 USD is a budget limit. Priya's handout is planned for 8 October. The response should preserve those distinctions and leave the year unspecified.</p></div>
         <p><strong>Try one follow-up:</strong> "Make it two sentences, keeping the uncertainty about the room and delivery format." Send it in the same chat so Copilot can use the previous exchange.</p>
-        <p><strong>If it invents a fact:</strong> point out the exact error and ask for a correction using only the notes. Recheck the correction; do not assume the second answer is right.</p>
+        <p><strong>Challenge a conclusion:</strong> ask, "Which part of the notes supports that result, and what is still an assumption?" Use the source to decide whether the wording needs adjustment.</p>
         <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Prompting and iteration</a></p>
       </article>
 
@@ -291,6 +291,7 @@ Keep the whole agenda at 30 minutes. Explain what you changed in one sentence.
 Separate any new assumptions from the agenda.</pre>
         </div>
         <div class="check"><h3>Check the result</h3><p>Add the minutes yourself: they must total 30. Are introductions 8 minutes or less? Does the answer preserve the undecided format? Ask for changes if it does not.</p></div>
+        <p><strong>Explore another viewpoint:</strong> ask, "How would this agenda change if the priority were helping quieter colleagues participate? Keep the same duration and source facts." Compare the alternatives and decide which better serves your audience.</p>
         <p><strong>Reuse the pattern:</strong> "Do [task] for [audience/purpose], using [source]. Return [format/length]. Do not [boundary]. If something is missing, [ask or flag it]." Replace every bracket before sending.</p>
         <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Goal, context, source, expectations</a></p>
       </article>
@@ -298,7 +299,7 @@ Separate any new assumptions from the agenda.</pre>
       <article class="lesson" id="grounding" data-core="true" aria-labelledby="title-grounding">
         <p class="eyebrow">04 &middot; Foundations &middot; 7 minutes</p>
         <h2 id="title-grounding" tabindex="-1">Give it the right information.</h2>
-        <p><strong>You will learn:</strong> the difference between public-web research, supplied content, and organizational context. <strong>Grounding</strong> means supplying or retrieving information to base an answer on; it reduces guesswork, not the need to review.</p>
+        <p><strong>You will learn:</strong> the difference between public-web research, supplied content, and organizational context. <strong>Grounding</strong> means supplying or retrieving information to base an answer on, giving you a shared reference for follow-up questions and review.</p>
         <div class="grid">
           <div class="card"><h3>Public web</h3><p>Useful for public information and research where enabled. Ask for source links and check their dates. A web answer is not an answer about your internal project.</p></div>
           <div class="card"><h3>Your work and supplied files</h3><p>Use work context to ask about information you have permission to access, or explicitly attach a file or provide notes. Inside an app, identify the document or conversation you mean. Naming a file is not proof that Copilot read it.</p></div>
@@ -315,35 +316,36 @@ Separate any new assumptions from the agenda.</pre>
 Summarize the planned session's duration, audience, responsibilities, and budget.
 Then list the unresolved details explicitly identified in the notes.
 Point me to the supporting text for each statement.
-Do not add outside research or turn assumptions into facts.
-If you cannot access the file, tell me instead of guessing.</pre>
+Keep the response within the supplied source and distinguish stated facts from assumptions.
+If you cannot access the file, tell me so I can provide the relevant content.</pre>
         </div>
-        <div class="check"><h3>Check the result</h3><p>The source says 30 minutes, 12 new colleagues, Alex coordinating, and Priya drafting the handout by 8 October. The 600 USD amount is a budget limit. The year, spending approval, room, and delivery format are unresolved. A citation can be incomplete or point to material that does not support the claim.</p></div>
+        <div class="check"><h3>Check the result</h3><p>The source says 30 minutes, 12 new colleagues, Alex coordinating, and Priya drafting the handout by 8 October. The 600 USD amount is a budget limit. The year, spending approval, room, and delivery format are unresolved. Open the supporting passages to confirm the details and context.</p></div>
         <p><strong>If attachment is unavailable:</strong> paste a small permitted excerpt, say "use only the excerpt below," and narrow the task to that excerpt. Do not imply Copilot saw the whole file. Never remove protection or move real work content to a personal service to make an exercise work.</p>
         <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-content-to-microsoft-365-copilot-chat-prompts">Add content to Chat</a><a href="https://learn.microsoft.com/en-us/copilot/overview">Work and web grounding</a><a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Prompting guidance</a></p>
       </article>
 
       <article class="lesson" id="review" data-core="true" aria-labelledby="title-review">
         <p class="eyebrow">05 &middot; Foundations &middot; 5 minutes</p>
-        <h2 id="title-review" tabindex="-1">Review before you rely on it.</h2>
-        <p><strong>You will learn:</strong> a short quality and safety check for every output. <strong>Need:</strong> your answer from an earlier guide.</p>
+        <h2 id="title-review" tabindex="-1">Challenge, refine, and check.</h2>
+        <p><strong>You will learn:</strong> to challenge Copilot's results as a normal part of working together: check accuracy, clarify incorrectly implied results, and explore a different viewpoint. <strong>Need:</strong> your answer from an earlier guide.</p>
         <ol>
-          <li><strong>Facts:</strong> compare names, dates, numbers, quotes, and claimed decisions with the original source. Check math outside the generated explanation.</li>
-          <li><strong>Gaps:</strong> find unsupported assumptions, missing caveats, and omitted requests. "Not specified" is often the right answer.</li>
+          <li><strong>Accuracy:</strong> ask which source details support the result, then compare names, dates, numbers, and decisions with that material. Check calculations yourself.</li>
+          <li><strong>Perspective:</strong> ask what another stakeholder might conclude from the same facts. Separate a useful alternative interpretation from a confirmed decision, and identify what needs clarification.</li>
           <li><strong>Audience:</strong> check tone, useful detail, accessibility, and who is allowed to see the material.</li>
           <li><strong>Actions:</strong> review the actual recipient list, edits, proposed actions, and sharing permissions before sending, accepting changes, or sharing.</li>
         </ol>
         <div class="prompt"><div class="prompt-head"><strong>Try this &middot; challenge the draft</strong><button class="enhanced" type="button" data-copy="prompt-review">Copy follow-up</button></div>
-          <pre id="prompt-review">Audit your previous answer against the source material I supplied.
-List unsupported claims, assumptions, and information that is missing.
-Then provide a corrected version that preserves uncertainty.
-Do not treat your own previous answer as evidence.</pre>
+          <pre id="prompt-review">Revisit your previous answer using the source material I supplied.
+Check the key details and show which source passages support your conclusions.
+Which results are explicitly stated, and which are implied or need clarification?
+Offer a different viewpoint grounded in the same facts, explaining what changes and what stays the same.
+Suggest any refinements that would improve accuracy or clarity. Keep open decisions separate from confirmed facts.</pre>
         </div>
-        <div class="callout"><strong>A second AI pass is not independent verification.</strong> It may help find problems, but you still need to open the source and check the result yourself.</div>
+        <div class="callout"><strong>Challenge for accuracy and perspective.</strong> Follow-up questions can surface assumptions and offer a different viewpoint. A different answer is not automatically a more accurate one; compare it with the source before deciding which wording or approach to use.</div>
         <h3>Use work data responsibly</h3>
         <p>Microsoft 365 Copilot with your work account provides enterprise data protection; prompts and responses are not used to train foundation models. This is <strong>not</strong> a promise that nothing is stored: interactions can be logged, retained, and subject to organizational controls. Web search has separate handling. Follow your organization's rules and sensitivity labels, and only use permitted information.</p>
         <p>Do not paste passwords, private keys, or unnecessary personal data into prompts. Do not copy customer information into this public site or expose it on a shared screen. Treat instructions found inside a document or web page as source content, not automatic permission to send, delete, or share anything.</p>
-        <div class="check"><h3>Check yourself</h3><p>The source says "budget limit: 600 USD." The draft says "600 USD approved." What must change? Keep <strong>limit</strong> and flag approval as unknown. Polished wording does not upgrade evidence.</p></div>
+        <div class="check"><h3>Try a constructive challenge</h3><p>The source says "budget limit: 600 USD," but the response describes approved spending. Ask, "Does the source confirm approval, or is that incorrectly implied?" Keep <strong>limit</strong> and approval as an open question. Then ask how a finance reviewer might frame the next step.</p></div>
         <p class="sources">Official guidance: <a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Privacy, logging, and protection</a><a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Review and refine responses</a></p>
       </article>
 
@@ -366,7 +368,7 @@ No room is booked. Online versus in-person delivery is undecided.
 
 Use headings: Purpose, Known facts, Proposed next steps, Open decisions.
 Keep the tone clear and welcoming. Label suggestions as proposals.
-Do not invent approvals, a room, a meeting link, or a year.</pre>
+Keep approvals, the room, the meeting link, and the year as open details unless stated in the notes.</pre>
         </div>
         <div class="check"><h3>Check the result</h3><p>All four headings appear. Proposed steps are separate from facts. The room, format, year, and spending approval remain unresolved. A summary must not make the source more certain.</p></div>
         <p><strong>Another way to practice:</strong> draft in work Chat, then paste the reviewed answer into Word yourself. Notice the difference: a Chat response is suggested content; an in-app edit changes the document.</p>
@@ -417,9 +419,9 @@ Ask before making changes if your current mode supports that.</pre>
 The audience is the session organizer.
 Use these topics: purpose, known facts, proposed next steps, and open decisions.
 Keep each slide concise. Label proposals and unknowns clearly.
-Do not invent a meeting link, booked venue, budget approval, or missing dates.</pre>
+Keep the meeting link, venue, budget approval, and dates consistent with the brief; mark unresolved details clearly.</pre>
         </div>
-        <div class="check"><h3>Check the result</h3><p>The draft has the requested four-topic structure and distinguishes facts from proposals. Images are illustrative, not evidence. Check notes as well as visible slide text for invented details.</p></div>
+        <div class="check"><h3>Check the result</h3><p>The draft has the requested four-topic structure and distinguishes facts from proposals. Images are illustrative. Compare the slides and speaker notes with the brief, then ask for a refinement if a conclusion needs clearer context.</p></div>
         <p><strong>If file referencing or creation is unavailable:</strong> paste the fictional brief into work Chat and ask for a four-slide outline, then build the slides yourself. File-reference support differs between creation experiences, including newer editing/agent modes; a missing control is not proof the file is wrong.</p>
         <p><strong>Practice one refinement:</strong> ask, "Shorten each slide title to six words or fewer without changing the meaning." Check the titles yourself, then review the slide layout and contrast. Keep the source facts unchanged.</p>
         <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/powerpoint/copilot/create-a-new-presentation-with-copilot-in-powerpoint">Create a presentation and review it</a></p>
@@ -440,7 +442,7 @@ Do not invent a meeting link, booked venue, budget approval, or missing dates.</
 Thank her for planning to draft the welcome-session handout by 8 October.
 Ask whether she needs any information from the organizer.
 The session format is still undecided and no room is booked.
-Do not say the handout is complete, invent a year, promise approval, or add a meeting link.
+Describe the handout as planned and leave the year, approval, and meeting link unspecified.
 Keep this as a draft for my review.</pre>
         </div>
         <div class="check"><h3>Check the result</h3><p>The email asks one clear question and does not turn a planned handout into a completed one. The To field is still empty and no message has been sent.</p></div>
@@ -466,7 +468,7 @@ Point to the supporting message or transcript passage where available.
 Do not treat suggestions as agreements or assign new work.</pre>
         </div>
         <div class="callout"><strong>For a useful post-meeting recap, plan for a transcript.</strong> Some live meeting experiences can work without transcription, but dependable post-meeting questions about spoken content require an available transcript. Follow the organizer's settings and your organization's recording, transcription, and retention rules.</div>
-        <div class="check"><h3>Check the result</h3><p>If someone said "Maybe Alex could book a room," that is a suggestion, not an assigned action. If no deadline was given, the summary should not invent one.</p></div>
+        <div class="check"><h3>Check the result</h3><p>If someone said "Maybe Alex could book a room," that is a suggestion, not an assigned action. Keep an unstated deadline as "not specified" and ask for clarification when needed.</p></div>
         <p><strong>No practice meeting handy?</strong> Use work Chat with this fictional excerpt: "Alex: We agreed to keep the session to 30 minutes. Priya: I will draft the handout by 8 October. Sam: Maybe Alex could book a room. Alex: We have not chosen online or in-person yet." Ask the same question. Only Priya has an explicit commitment and due date in these notes.</p>
         <p class="sources">Official guidance: <a href="https://support.microsoft.com/en-us/teams/meetings-events/welcome-to-copilot-in-microsoft-teams">Teams chat and meetings</a><a href="https://support.microsoft.com/en-us/teams/copilot/catch-up-on-meetings-with-microsoft-365-copilot-in-teams">Meeting recap and transcription</a></p>
       </article>
@@ -542,7 +544,7 @@ Do not include text, company logos, real people, or branded products.</pre>
         <p class="eyebrow">14 &middot; Optional exploration &middot; 5 minutes</p>
         <h2 id="title-agents" tabindex="-1">Agents: a helper with a narrower job.</h2>
         <p><strong>You will learn:</strong> when a specialized agent may help. You do not need to build one, use Copilot Studio, or configure automation to finish this path.</p>
-        <p>An agent is a specialized assistant with instructions, knowledge, and sometimes tools for a particular task. Some answer questions; others can take actions. Its stated purpose is not a guarantee of correctness or permission to do anything it proposes.</p>
+        <p>An agent is a specialized assistant with instructions, knowledge, and sometimes tools for a particular task. Some answer questions; others can take actions. Give it a clear brief, review its results, and confirm any proposed actions separately.</p>
         <ol>
           <li>Open the available agents list in your approved Copilot experience. Read an organization-approved agent's description and any permissions or data-access information.</li>
           <li>Choose an agent already made available to you. If an unexpected consent, installation, or new connection request appears, stop and follow your organization's process.</li>
@@ -590,23 +592,23 @@ If a reference is inaccessible, identify that limitation.</pre>
         <p><strong>Your challenge:</strong> use the fictional welcome-session notes to produce a Word brief, a short PowerPoint presentation, and an unsent Outlook email. Use work Chat to plan and refine, then work inside each app to create the actual artifact.</p>
         <ol>
           <li><strong>Brief:</strong> supply the <a href="#practice-kit">fictional source notes</a> and write your own prompt with a goal, audience, source, and output expectations. Ask for facts, proposed actions, and open decisions.</li>
-          <li><strong>Improve:</strong> make one follow-up request that changes tone or length without changing facts. Check what changed.</li>
+          <li><strong>Improve:</strong> challenge one conclusion and ask for another stakeholder's viewpoint using the same facts. Decide whether to refine the response, then adjust tone or length for your audience.</li>
           <li><strong>Repurpose:</strong> ask for a four-slide outline from the reviewed brief. Create it in PowerPoint if your experience allows, or build it manually.</li>
           <li><strong>Communicate:</strong> draft an email asking for the unresolved decisions. Leave recipients empty and do not send it.</li>
           <li><strong>Verify:</strong> use the checklist below, then choose one low-risk real task to try later using your organization's data-handling rules.</li>
         </ol>
         <div class="check"><h3>Done means you can show this</h3><ul>
           <li>The source is explicit, the audience is clear, and the output has the format you asked for.</li>
-          <li>No invented year, venue, meeting link, spending approval, or completed handout appears.</li>
+          <li>The year, venue, meeting link, spending approval, and handout status match what the source establishes or remain open details.</li>
           <li>Proposed actions remain separate from commitments. The 600 USD figure remains a budget limit.</li>
-          <li>You corrected at least one issue or can explain why no correction was needed.</li>
+          <li>You challenged the result, considered another viewpoint, and can explain why you kept or refined the answer.</li>
           <li>You know which parts Copilot generated and which parts you personally checked. Nothing was sent or shared by this exercise.</li>
         </ul></div>
         <h3>Three quick self-checks</h3>
-        <details><summary>1. Does a linked citation guarantee a claim is correct?</summary><p>No. Open the original source and check that it supports the actual claim, with the right date and context.</p></details>
+        <details><summary>1. How can challenging a result improve your work?</summary><p>It can clarify assumptions, identify incorrectly implied results, and offer another viewpoint. Compare the response with the source to assess accuracy; a different perspective alone does not confirm the facts.</p></details>
         <details><summary>2. Does getting an answer in Chat mean Copilot edited my workbook?</summary><p>No. Generated advice is different from an applied edit. Inspect the workbook and the active app mode.</p></details>
         <details><summary>3. Does a work-data search read every file in my organization?</summary><p>No. Copilot works with information you have permission to access and the context available to that experience. Select the relevant source and verify that it was actually used.</p></details>
-        <p><strong>Your reusable habit:</strong> brief it, ground it, refine it, check it. Repeat this workflow with one low-risk task from your own work. Keep the useful prompt, record what you had to correct, and improve it the next time.</p>
+        <p><strong>Your reusable habit:</strong> brief it, ground it, challenge it, refine it. Repeat this workflow with one low-risk task from your own work. Keep the useful prompt, note which follow-up question helped, and compare the final result with your source.</p>
         <p class="sources">Keep learning: <a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt">Microsoft prompting guidance</a><a href="https://learn.microsoft.com/en-us/copilot/privacy-and-protections">Work-data protections</a></p>
       </article>
 
@@ -645,7 +647,7 @@ If a reference is inaccessible, identify that limitation.</pre>
         <div class="grid">
           <div class="card"><h3>I cannot find the control</h3><p>Confirm your work account and check whether you are using the web or desktop app. Labels and layouts differ. Try the current app version or ask your support team for the right entry point.</p></div>
           <div class="card"><h3>It cannot read my file</h3><p>Check permissions, file type, protection, source selection, and attachment/reference support. A filename in the prompt is not the file itself. Never strip a label or bypass an access restriction.</p></div>
-          <div class="card"><h3>The answer is vague or wrong</h3><p>Narrow the goal, identify the source and audience, specify the format, and correct a specific error. Verify again; a confident rewrite can still be wrong.</p></div>
+          <div class="card"><h3>The answer needs more context</h3><p>Clarify the goal, source, audience, and format. Ask which details support the result and whether another viewpoint would help. Refine any incorrectly implied results and compare the updated response with the source.</p></div>
           <div class="card"><h3>It changed more than expected</h3><p>Pause. Inspect the active editing mode and use Undo or the app's version history as appropriate. Practice on a copy. A sentence saying "ask first" is not a substitute for checking the mode and available controls.</p></div>
         </div>
         <h3>Plain-language glossary</h3>
@@ -653,8 +655,8 @@ If a reference is inaccessible, identify that limitation.</pre>
           <dt>Prompt</dt><dd>The instruction or question you send to Copilot.</dd>
           <dt>Context</dt><dd>Background that helps explain the task, audience, or situation.</dd>
           <dt>Grounding</dt><dd>Using supplied or retrieved sources to inform an answer.</dd>
-          <dt>Citation</dt><dd>A pointer to a source. A place to check, not a guarantee.</dd>
-          <dt>Hallucination</dt><dd>A generated statement that looks plausible but is unsupported or incorrect.</dd>
+          <dt>Citation</dt><dd>A pointer to source material you can open to check the details and context.</dd>
+          <dt>Incorrectly implied result</dt><dd>A conclusion that goes beyond what the source establishes, such as treating a budget limit as approved spending. Ask what supports it and clarify the wording.</dd>
           <dt>Tenant</dt><dd>Your organization's Microsoft 365 environment, with its own settings and policies.</dd>
           <dt>Agent</dt><dd>A specialized assistant with defined instructions, knowledge, and sometimes action-taking tools.</dd>
           <dt>Human review</dt><dd>Your check of accuracy, appropriateness, permissions, and consequences before relying on or acting on output.</dd>
